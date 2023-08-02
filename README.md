@@ -37,3 +37,7 @@ We welcome contributions to improve DataFestArchive! If you find any issues or h
 ## License
 
 This project is licensed under the [MIT License](LICENSE).
+
+### Attribution
+
+<a href="https://www.flaticon.com/free-icons/file" title="file icons">File icons created by Freepik - Flaticon</a>
