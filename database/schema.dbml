@@ -1,0 +1,69 @@
+Table student {
+  id integer [primary key]
+  name varchar
+  email varchar
+  degree_program varchar
+  school varchar
+}
+
+Table project {
+  id integer [primary key]
+  name varchar
+  semester varchar
+  year integer
+  project_overview text
+  final_presentation varchar
+}
+
+Table project_has_student {
+  project_id integer
+  student_id integer
+}
+
+Table advisor {
+  id integer [primary key]
+  name varchar
+  email varchar
+  organization varchar
+  title varchar
+  primary_school varchar
+}
+
+Table project_has_advisor {
+  project_id integer
+  advisor_id integer
+}
+
+
+Table has_award {
+  recipient_id integer
+  award integer
+}
+
+
+Table skill_or_software {
+  id integer [primary key]
+  name varchar
+  type varchar
+}
+
+Table topic {
+  id integer [primary key]
+  topic varchar
+}
+
+Ref: "student"."id" < "project_has_student"."student_id"
+
+Ref: "project"."id" < "project_has_student"."project_id"
+
+Ref: "advisor"."id" < "project_has_advisor"."advisor_id"
+
+Ref: "project"."id" < "project_has_advisor"."project_id"
+
+Ref: "student"."id" < "has_award"."recipient_id"
+
+Ref: "project"."id" < "has_award"."recipient_id"
+
+Ref: "project"."id" < "skill_or_software"."id"
+
+Ref: "project"."id" < "topic"."id"
