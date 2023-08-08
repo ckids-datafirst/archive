@@ -1,0 +1,13 @@
+# This file contains values from Cookiecutter
+
+default_context:
+  project_name: "datafest-archive"
+  project_description: "DataFestArchive is a Python package designed to generate the DataFestArchive website from past versions of DataFest"
+  organization: "ckids-datafirst"
+  license: "MIT"
+  minimal_python_version: 3.9
+  github_name: "ckids-datafirst"
+  email: "mosorio@isi.edu"
+  version: "0.1.0"
+  line_length: "88"
+  create_example_template: "cli"
