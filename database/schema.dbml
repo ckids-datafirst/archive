@@ -13,6 +13,10 @@ Table project {
   year integer
   project_overview text
   final_presentation varchar
+  external_link varchar
+  url_code varchar
+  url_pdf varchar
+  url_video varchar
 }
 
 Table project_has_student {
