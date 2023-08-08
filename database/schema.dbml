@@ -20,6 +20,7 @@ Table project {
   award_id integer [ref: < "has_award"."recipient_id"]
   skill_required_id integer [ref: < "skill_or_software"."id"]
   topic_id integer [ref: < "topic"."id"]
+
 }
 
 Table project_has_student {
