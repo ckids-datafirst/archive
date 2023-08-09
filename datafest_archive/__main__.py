@@ -1,5 +1,7 @@
 # type: ignore[attr-defined]
+from pathlib import Path
 from typing import Optional
+from typing_extensions import Annotated
 
 from enum import Enum
 from random import choice
@@ -35,17 +37,8 @@ def version_callback(print_version: bool) -> None:
         raise typer.Exit()
 
 
-@app.command(name="")
+@app.command()
 def main(
-    name: str = typer.Option(..., help="Person to greet."),
-    color: Optional[Color] = typer.Option(
-        None,
-        "-c",
-        "--color",
-        "--colour",
-        case_sensitive=False,
-        help="Color for print. If not specified then choice will be random.",
-    ),
     print_version: bool = typer.Option(
         None,
         "-v",
@@ -55,13 +48,20 @@ def main(
         help="Prints the version of the datafest-archive package.",
     ),
 ) -> None:
-    """Print a greeting with a giving name."""
-    if color is None:
-        color = choice(list(Color))
+    console.print(f"[bold blue]DataFestArchive[/] version: [bold blue]{version}[/]")
 
-    greeting: str = hello(name)
-    console.print(f"[bold {color}]{greeting}[/]")
+@app.command()
+def generate(
+    database: Annotated[Path, typer.Argument(help="The database to use.")],
+    website_output_directory: Annotated[Path, typer.Argument(help="The directory to output the website to.")],
+) -> None:
+    if not database.exists():
+        console.print(f"[bold red]Database {database} does not exist![/]")
+        raise typer.Exit(code=1)
+    if not website_output_directory.exists():
+        console.print(f"[bold red]Website output directory {website_output_directory} does not exist![/]")
+        raise typer.Exit(code=1)
 
-
+    console.print(f"[bold {database}]{website_output_directory}[/]")
 if __name__ == "__main__":
     app()
