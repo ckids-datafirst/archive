@@ -1,9 +1,8 @@
 # type: ignore[attr-defined]
-from pathlib import Path
-from typing import Optional
-from typing_extensions import Annotated
+from typing import Annotated, Optional
 
 from enum import Enum
+from pathlib import Path
 from random import choice
 
 import typer
@@ -50,18 +49,25 @@ def main(
 ) -> None:
     console.print(f"[bold blue]DataFestArchive[/] version: [bold blue]{version}[/]")
 
+
 @app.command()
 def generate(
     database: Annotated[Path, typer.Argument(help="The database to use.")],
-    website_output_directory: Annotated[Path, typer.Argument(help="The directory to output the website to.")],
+    website_output_directory: Annotated[
+        Path, typer.Argument(help="The directory to output the website to.")
+    ],
 ) -> None:
     if not database.exists():
         console.print(f"[bold red]Database {database} does not exist![/]")
         raise typer.Exit(code=1)
     if not website_output_directory.exists():
-        console.print(f"[bold red]Website output directory {website_output_directory} does not exist![/]")
+        console.print(
+            f"[bold red]Website output directory {website_output_directory} does not exist![/]"
+        )
         raise typer.Exit(code=1)
 
     console.print(f"[bold {database}]{website_output_directory}[/]")
+
+
 if __name__ == "__main__":
     app()
