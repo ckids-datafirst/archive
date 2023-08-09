@@ -10,8 +10,8 @@ description = "DataFestArchive is a Python package designed to generate the Data
 readme = "README.md"
 authors = ["ckids-datafirst <mosorio@isi.edu>"]
 license = "MIT"
-repository = "https://github.com/ckids-datafirst/datafest-archive"
-homepage = "https://github.com/ckids-datafirst/datafest-archive"
+repository = "https://github.com/ckids-datafirst/archive"
+homepage = "https://github.com/ckids-datafirst/archive"
 
 # Keywords description https://python-poetry.org/docs/pyproject/#keywords
 keywords = []  #! Update me

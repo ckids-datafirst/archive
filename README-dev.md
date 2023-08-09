@@ -2,7 +2,7 @@
 
 ### Makefile usage
 
-[`Makefile`](https://github.com/ckids-datafirst/datafest-archive/blob/master/Makefile) contains a lot of functions for faster development.
+[`Makefile`](https://github.com/ckids-datafirst/archive/blob/master/Makefile) contains a lot of functions for faster development.
 
 <details>
 <summary>1. Download and remove Poetry</summary>
@@ -154,7 +154,7 @@ Remove docker image with
 make docker-remove
 ```
 
-More information [about docker](https://github.com/ckids-datafirst/datafest-archive/tree/master/docker).
+More information [about docker](https://github.com/ckids-datafirst/archive/tree/master/docker).
 
 </p>
 </details>
