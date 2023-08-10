@@ -1,58 +1,57 @@
-from typing import Optional
+from typing import List, Optional
 
-from pydantic import BaseModel
+from dataclasses import dataclass
 
 
-class Student(BaseModel):
+@dataclass
+class Award:
     id: int
-    name: Optional[str]
-    email: Optional[str]
-    degree_program: Optional[str]
-    school: Optional[str]
+    name: str
+    description: str
 
 
-class Project(BaseModel):
+@dataclass
+class SkillOrSoftware:
     id: int
-    name: Optional[str]
-    semester: Optional[str]
-    year: Optional[int]
-    project_overview: Optional[str]
-    final_presentation: Optional[str]
-    award_id: Optional[int]
-    skill_required_id: Optional[int]
-    topic_id: Optional[int]
+    name: str
+    type: str
 
 
-class ProjectHasStudent(BaseModel):
-    project_id: Optional[int]
-    student_id: Optional[int]
-
-
-class Advisor(BaseModel):
+@dataclass
+class Topic:
     id: int
-    name: Optional[str]
-    email: Optional[str]
-    organization: Optional[str]
-    title: Optional[str]
-    primary_school: Optional[str]
+    name: str
 
 
-class ProjectHasAdvisor(BaseModel):
-    project_id: Optional[int]
-    advisor_id: Optional[int]
-
-
-class HasAward(BaseModel):
-    recipient_id: Optional[int]
-    award: Optional[int]
-
-
-class SkillOrSoftware(BaseModel):
+@dataclass
+class Student:
     id: int
-    name: Optional[str]
-    type: Optional[str]
+    name: str
+    email: str
+    degree_program: str
+    school: str
 
 
-class Topic(BaseModel):
+@dataclass
+class Advisor:
     id: int
-    name: Optional[str]
+    name: str
+    email: str
+    organization: str
+    title: str
+    primary_school: str
+
+
+@dataclass
+class Project:
+    id: int
+    name: str
+    semester: str
+    year: int
+    project_overview: str
+    final_presentation: str
+    award: Award
+    skill_required: list[SkillOrSoftware]
+    topic: list[Topic]
+    students: list[Student]
+    advisors: list[Advisor]

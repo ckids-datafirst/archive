@@ -36,7 +36,6 @@ python = "^3.9"
 
 typer = {extras = ["all"], version = "^0.9.0"}
 rich = "^13.5.2"
-omymodels = "^0.13.0"
 
 [tool.poetry.dev-dependencies]
 bandit = "^1.7.1"
@@ -56,6 +55,10 @@ coverage-badge = "^1.1.0"
 pytest-html = "^3.1.1"
 pytest-cov = "^4.1.0"
 
+
+[tool.poetry.group.dev.dependencies]
+pydantic-factories = "^1.17.3"
+polyfactory = "^2.7.2"
 
 [tool.black]
 # https://github.com/psf/black
