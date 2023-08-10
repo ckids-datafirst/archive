@@ -1,3 +1,4 @@
+
 #* Variables
 SHELL := /usr/bin/env bash
 PYTHON := python
@@ -111,3 +112,7 @@ build-remove:
 
 .PHONY: cleanup
 cleanup: pycache-remove dsstore-remove mypycache-remove ipynbcheckpoints-remove pytestcache-remove
+
+.PHONY: database
+database:
+	omm database/schema.sql -m pydantic -t datafest_archive/database/models.py
