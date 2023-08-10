@@ -115,4 +115,4 @@ cleanup: pycache-remove dsstore-remove mypycache-remove ipynbcheckpoints-remove 
 
 .PHONY: database
 database:
-	omm database/schema.sql -m pydantic
+	omm database/schema.sql -m pydantic -t datafest_archive/database/models.py

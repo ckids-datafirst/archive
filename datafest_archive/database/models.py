@@ -1,9 +1,9 @@
 from typing import Optional
+
 from pydantic import BaseModel
 
 
-class student(BaseModel):
-
+class Student(BaseModel):
     id: int
     name: Optional[str]
     email: Optional[str]
@@ -11,8 +11,7 @@ class student(BaseModel):
     school: Optional[str]
 
 
-class project(BaseModel):
-
+class Project(BaseModel):
     id: int
     name: Optional[str]
     semester: Optional[str]
@@ -24,14 +23,12 @@ class project(BaseModel):
     topic_id: Optional[int]
 
 
-class projectHasStudent(BaseModel):
-
+class ProjectHasStudent(BaseModel):
     project_id: Optional[int]
     student_id: Optional[int]
 
 
-class advisor(BaseModel):
-
+class Advisor(BaseModel):
     id: int
     name: Optional[str]
     email: Optional[str]
@@ -40,26 +37,22 @@ class advisor(BaseModel):
     primary_school: Optional[str]
 
 
-class projectHasAdvisor(BaseModel):
-
+class ProjectHasAdvisor(BaseModel):
     project_id: Optional[int]
     advisor_id: Optional[int]
 
 
-class hasAward(BaseModel):
-
+class HasAward(BaseModel):
     recipient_id: Optional[int]
     award: Optional[int]
 
 
-class skillOrSoftware(BaseModel):
-
+class SkillOrSoftware(BaseModel):
     id: int
     name: Optional[str]
     type: Optional[str]
 
 
-class topic(BaseModel):
-
+class Topic(BaseModel):
     id: int
     name: Optional[str]
