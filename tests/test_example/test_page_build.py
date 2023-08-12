@@ -1,11 +1,5 @@
-from datafest_archive.advisor_page_builder import generate_advisor_page
-from datafest_archive.database.factory import (
-    AdvisorFactory,
-    ProjectFactory,
-    StudentFactory,
-)
+from datafest_archive.database.factory import ProjectFactory
 from datafest_archive.page_builder import generate_project_page
-from datafest_archive.student_page_builder import generate_student_page
 
 
 def test_build_project_page_test():

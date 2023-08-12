@@ -1,19 +1,5 @@
-from typing import List
-
-import dataclasses
-import json
-
-import pytest
-
 from datafest_archive.database.factory import ProjectFactory
-from datafest_archive.database.models import (
-    Advisor,
-    Award,
-    Project,
-    SkillOrSoftware,
-    Student,
-    Topic,
-)
+from datafest_archive.database.models import Project
 
 
 def test_hello():

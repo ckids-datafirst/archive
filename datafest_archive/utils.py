@@ -4,6 +4,7 @@ import pathlib
 
 import yaml
 
+from datafest_archive.database.models import Resource
 from datafest_archive.templates.models import (
     Image,
     Organization,
@@ -66,7 +67,7 @@ def get_dumper():
     return safe_dumper
 
 
-def dump_yaml(resource: Union[ProjectPage | PeoplePage]) -> str:
+def dump_yaml(resource: Resource) -> str:
     return yaml.dump(resource, Dumper=get_dumper(), sort_keys=True)
 
 
