@@ -1,17 +1,9 @@
-from typing import Union
-
 import pathlib
 
 import yaml
 
 from datafest_archive.database.models import Resource
-from datafest_archive.templates.models import (
-    Image,
-    Organization,
-    PeoplePage,
-    ProjectPage,
-    Social,
-)
+from datafest_archive.templates.models import Image, Organization, ProjectPage, Social
 
 
 def project_page_representer(dumper, data):
