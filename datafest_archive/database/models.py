@@ -1,4 +1,4 @@
-from typing import List, Optional
+from typing import List, Optional, Union
 
 from dataclasses import dataclass
 
@@ -55,3 +55,6 @@ class Project:
     topic: list[Topic]
     students: list[Student]
     advisors: list[Advisor]
+
+
+Resource = Union[Project, Student, Advisor]
