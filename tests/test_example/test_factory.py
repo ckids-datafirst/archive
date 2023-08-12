@@ -27,9 +27,3 @@ def test_hello():
     assert isinstance(result.year, int)
     assert isinstance(result.project_overview, str)
     assert isinstance(result.final_presentation, str)
-    with open("dump.json", "w") as f:
-        f.write(json.dumps(dataclasses.asdict(result)))
-    # assert isinstance(result.skill_required, List[SkillOrSoftware])
-    # assert isinstance(result.topic, List[Topic])
-    # assert isinstance(result.students, List[Student])
-    # assert isinstance(result.advisors, List[Advisor])

@@ -70,7 +70,14 @@ def dump_yaml(resource: Union[ProjectPage | PeoplePage]) -> str:
     return yaml.dump(resource, Dumper=get_dumper(), sort_keys=True)
 
 
+def create_directory(path: pathlib.Path) -> pathlib.Path:
+    path.mkdir(parents=True, exist_ok=True)
+    return path
+
+
 def write_file(content: str, path: pathlib.Path):
+    if path.exists() and path.is_file():
+        raise ValueError(f"Path {path} already exists.")
     if path.is_dir():
         raise ValueError(f"Path {path} is a directory.")
     if not path.parent.exists():

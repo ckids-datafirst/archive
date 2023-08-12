@@ -66,3 +66,16 @@ class ProjectPage:
     url_slides: str
     url_video: str
     slides: str
+
+
+@dataclass
+class Header:
+    caption: str
+    image: Image
+
+
+@dataclass
+class SimplePage:
+    title: str
+    summary: str
+    header: Optional[Header]

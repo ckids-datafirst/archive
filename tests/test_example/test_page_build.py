@@ -11,8 +11,6 @@ from datafest_archive.student_page_builder import generate_student_page
 def test_build_project_page_test():
     project = ProjectFactory.build()
     project_page = generate_project_page(project)
-    with open("project_page_example.md", "w") as f:
-        f.write(project_page)
 
 
 # def test_build_advisor_page_test():
