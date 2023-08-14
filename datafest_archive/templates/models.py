@@ -43,7 +43,7 @@ class PeoplePage:
     title: str
     role: str
     user_groups: list[str]
-    social: Social
+    social: list[Social]
     bio: str
     education: Optional[Education]
     email: str
@@ -79,3 +79,11 @@ class SimplePage:
     title: str
     summary: str
     header: Optional[Header]
+
+
+@dataclass
+class MenuItem:
+    name: str
+    url: str
+    weight: int
+    parent: Optional[str]

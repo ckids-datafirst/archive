@@ -21,7 +21,7 @@ def build_advisor_structed_section(advisor: Advisor) -> PeoplePage:
         title=advisor.name,
         role=ROLE,
         user_groups=[ROLE],
-        social=email,
+        social=[email],
         email=advisor.email,
         bio="",
         education=None,

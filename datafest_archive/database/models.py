@@ -50,11 +50,17 @@ class Project:
     year: int
     project_overview: str
     final_presentation: str
-    award: Award
+    awards: list[Award]
     skill_required: list[SkillOrSoftware]
     topic: list[Topic]
     students: list[Student]
     advisors: list[Advisor]
+
+
+@dataclass
+class Edition:
+    semester: str
+    year: int
 
 
 Resource = Union[Project, Student, Advisor]

@@ -1,4 +1,5 @@
 import pathlib
+import re
 
 import yaml
 
@@ -75,5 +76,12 @@ def write_file(content: str, path: pathlib.Path):
         raise ValueError(f"Path {path} is a directory.")
     if not path.parent.exists():
         path.parent.mkdir(parents=True)
+
     with open(path, "w") as f:
         f.write(content)
+
+
+def sanitanize_name(name: str) -> str:
+    """Sanitize a name for use in a directory name."""
+    # remove non-alphanumeric characters
+    return re.sub(r"\W+", "", name).lower()

@@ -4,7 +4,10 @@ import yaml
 
 from datafest_archive.advisor_page_builder import generate_advisor_page
 from datafest_archive.database.models import Project, Resource, Student
-from datafest_archive.project_page_builder import generate_project_page
+from datafest_archive.project_page_builder import (
+    generate_project_page,
+    generate_project_url,
+)
 from datafest_archive.student_page_builder import generate_student_page
 from datafest_archive.templates.models import SimplePage
 from datafest_archive.utils import create_directory
@@ -15,10 +18,11 @@ CONTENT_PROJECT_DIRECTORY = "projects"
 
 def get_resource_path(resource: Resource, parent_directory: Path) -> Path:
     if isinstance(resource, Project):
+        edition = generate_project_url(resource)
         project_directory = create_directory(
-            parent_directory / CONTENT_PROJECT_DIRECTORY / str(resource.id)
+            parent_directory / CONTENT_PROJECT_DIRECTORY / edition / str(resource.id)
         )
-        return project_directory / f"_index.md"
+        return project_directory / f"index.md"
     elif isinstance(resource, Student):
         student_directory = create_directory(
             parent_directory / CONTENT_PEOPLE_DIRECTORY / f"student_{str(resource.id)}"
@@ -28,7 +32,7 @@ def get_resource_path(resource: Resource, parent_directory: Path) -> Path:
         advisor_directory = create_directory(
             parent_directory / CONTENT_PEOPLE_DIRECTORY / f"advisor_{str(resource.id)}"
         )
-        return advisor_directory / f"_index.md"
+    return advisor_directory / f"_index.md"
 
 
 def generate_resource_page(resource: Resource) -> str:

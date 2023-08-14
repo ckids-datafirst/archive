@@ -1,6 +1,14 @@
+from datetime import datetime
+
 from datafest_archive.database.models import Project
 from datafest_archive.templates.models import ProjectPage
 from datafest_archive.utils import dump_yaml
+
+date_format = "%Y"
+
+
+def generate_project_url(resource: Project) -> str:
+    return f"{resource.year}-{resource.semester}"
 
 
 def build_project_structed_section(project: Project) -> ProjectPage:
@@ -8,22 +16,29 @@ def build_project_structed_section(project: Project) -> ProjectPage:
     advisors = [advisor.name for advisor in project.advisors]
     authors = students + advisors
     edition = f"{project.semester} {project.year}"
-    tags = [edition]
+    tags = [edition] + [topic.name for topic in project.topic]
+    if project.awards:
+        tags.append("Featured")
+        for award in project.awards:
+            tags.append(award.name)
 
+    project_date = None
+    if project.year:
+        project_date = datetime.strptime(str(project.year), date_format)
     project_page = ProjectPage(
         title=project.name,
+        date=str(project_date),
         summary=project.project_overview,
         authors=authors,
         tags=tags,
-        categories=[topic.name for topic in project.topic],
-        external_link=project.final_presentation,
+        categories=tags,
+        external_link=None,
         image=None,
         url_code=None,
         url_pdf=None,
         url_slides=project.final_presentation,
         url_video=None,
         slides=project.final_presentation,
-        date=None,
         weight=10,
     )
     return project_page

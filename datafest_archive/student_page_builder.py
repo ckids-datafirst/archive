@@ -26,7 +26,7 @@ def build_student_structed_section(student: Student) -> PeoplePage:
         title=student.name,
         role=STUDENT_ROLE,
         user_groups=[STUDENT_ROLE],
-        social=email,
+        social=[email],
         email=student.email,
         bio="",
         education=education,

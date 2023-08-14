@@ -1,7 +1,18 @@
+from typing import List
+
 from faker import Faker
 from polyfactory import Use
 from polyfactory.factories import DataclassFactory
 
+from datafest_archive.database.fake_data import (
+    awards,
+    degree_programs,
+    organizations,
+    primary_schools,
+    project_names,
+    titles,
+    topics,
+)
 from datafest_archive.database.models import (
     Advisor,
     Award,
@@ -11,26 +22,9 @@ from datafest_archive.database.models import (
     Topic,
 )
 
-awards = [
-    "Best in Show",
-    "Best in Category",
-    "Best in Class",
-    "Best in Division",
-    "Best in Grade",
-]
-organizations = [
-    "University of Southern California",
-    "University of California, Los Angeles",
-]
-titles = ["Professor", "Associate Professor", "Assistant Professor"]
-primary_schools = ["Viterbi School of Engineering", "School of Cinematic Arts"]
-degree_programs = ["Computer Science", "Computer Engineering", "Electrical Engineering"]
-years = [2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022]
-
 
 class AwardFactory(DataclassFactory[Award]):
     __model__ = Award
-    __random_seed__ = 1
     __faker__ = Faker(locale="en_US")
 
     @classmethod
@@ -39,7 +33,7 @@ class AwardFactory(DataclassFactory[Award]):
 
     @classmethod
     def description(cls) -> str:
-        return cls.__faker__.paragraph(nb_sentences=3)
+        return cls.__random__.choice(awards)
 
 
 class SkillOrSoftwareFactory(DataclassFactory[SkillOrSoftware]):
@@ -58,17 +52,16 @@ class SkillOrSoftwareFactory(DataclassFactory[SkillOrSoftware]):
 
 class TopicFactory(DataclassFactory[Topic]):
     __model__ = Topic
-    __random_seed__ = 1
     __faker__ = Faker(locale="en_US")
 
     @classmethod
     def name(cls) -> str:
-        return cls.__faker__.sentence(nb_words=3)
+        return cls.__random__.choice(topics)
 
 
 class StudentFactory(DataclassFactory[Student]):
     __model__ = Student
-    __random_seed__ = 1
+    __random_seed__ = 2
     __faker__ = Faker(locale="en_US")
 
     @classmethod
@@ -121,7 +114,7 @@ class ProjectFactory(DataclassFactory[Project]):
 
     @classmethod
     def name(cls) -> str:
-        return cls.__faker__.sentence(nb_words=3)
+        return cls.__random__.choice(project_names)
 
     @classmethod
     def semester(cls) -> str:
@@ -139,8 +132,13 @@ class ProjectFactory(DataclassFactory[Project]):
     def final_presentation(cls) -> str:
         return cls.__faker__.url()
 
-    awards = Use(AwardFactory, size=1)
+    @classmethod
+    def topic(cls) -> list[Topic]:
+        return TopicFactory.batch(size=1)
+
+    @classmethod
+    def awards(self) -> list[Award]:  # type: ignore
+        if self.__random__.random() < 0.1:
+            return AwardFactory.batch(size=1)
+
     skill_required = Use(SkillOrSoftwareFactory.batch, size=3)
-    topic = Use(TopicFactory.batch, size=3)
-    students = Use(StudentFactory.batch, size=3)
-    advisors = Use(AdvisorFactory.batch, size=3)
