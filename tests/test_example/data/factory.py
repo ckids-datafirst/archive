@@ -4,7 +4,15 @@ from faker import Faker
 from polyfactory import Use
 from polyfactory.factories import DataclassFactory
 
-from datafest_archive.database.fake_data import (
+from datafest_archive.models.database import (
+    Advisor,
+    Award,
+    Project,
+    SkillOrSoftware,
+    Student,
+    Topic,
+)
+from tests.test_example.data.fake_data import (
     awards,
     degree_programs,
     organizations,
@@ -12,14 +20,6 @@ from datafest_archive.database.fake_data import (
     project_names,
     titles,
     topics,
-)
-from datafest_archive.database.models import (
-    Advisor,
-    Award,
-    Project,
-    SkillOrSoftware,
-    Student,
-    Topic,
 )
 
 

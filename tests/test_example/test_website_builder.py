@@ -1,14 +1,11 @@
 import random
-from pathlib import Path
 
-import pytest
-
-from datafest_archive.database.factory import (
+from datafest_archive.builder.website_buider import generate_website
+from tests.test_example.data.factory import (
     AdvisorFactory,
     ProjectFactory,
     StudentFactory,
 )
-from datafest_archive.website_buider import generate_website
 
 
 def test_build_website(tmp_path):

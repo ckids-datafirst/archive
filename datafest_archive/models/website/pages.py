@@ -1,8 +1,7 @@
-from typing import List, Optional
+from typing import List, Optional, Union
 
 from dataclasses import dataclass
-
-import yaml
+from datetime import datetime
 
 
 @dataclass
@@ -11,6 +10,7 @@ class Image:
     caption: str
     focal_point: str
     preview_only: bool
+    path: str
 
 
 @dataclass
@@ -59,13 +59,20 @@ class ProjectPage:
     categories: list[str]
     date: str
     weight: int
-    external_link: str
-    image: Image
-    url_code: str
-    url_pdf: str
-    url_slides: str
-    url_video: str
-    slides: str
+    external_link: Optional[str]
+    image: Optional[Image]
+    url_code: Optional[str]
+    url_pdf: Optional[str]
+    url_slides: Optional[str]
+    url_video: Optional[str]
+    slides: Optional[str]
+
+
+@dataclass
+class Pages:
+    name: str
+    url: str
+    weight: int
 
 
 @dataclass
@@ -82,8 +89,38 @@ class SimplePage:
 
 
 @dataclass
-class MenuItem:
-    name: str
-    url: str
-    weight: int
-    parent: Optional[str]
+class Filters:
+    folders: list[str]
+    tags: list[str]
+    exclude_tags: list[str]
+    kinds: list[str]
+
+
+@dataclass
+class Portafolio:
+    title: str
+    filters: Filters
+    sort_by: str
+    sort_ascending: bool
+    default_button_index: int
+
+
+@dataclass
+class BlockPortafolio:
+    id: str
+    content: Portafolio
+
+
+Sections = Union[Portafolio]
+
+
+@dataclass
+class ComplexPage:
+    title: str
+    date: str
+    type: str
+    sections: list[Sections]
+
+
+Page = Union[PeoplePage, ProjectPage, SimplePage]
+DateTimeNone = Union[datetime, None]

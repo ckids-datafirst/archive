@@ -1,13 +1,23 @@
+from typing import Any
+
+import datetime
 import pathlib
 import re
 
 import yaml
 
-from datafest_archive.database.models import Resource
-from datafest_archive.templates.models import Image, Organization, ProjectPage, Social
+from datafest_archive.constants import DATE_YEAR_FORMAT
+from datafest_archive.models.website.configuration import Menu
+from datafest_archive.models.website.pages import (
+    Image,
+    Organization,
+    Page,
+    ProjectPage,
+    Social,
+)
 
 
-def project_page_representer(dumper, data):
+def project_page_representer(dumper: yaml.Dumper, data: ProjectPage) -> Any:
     data_dict = {
         "title": data.title,
         "summary": data.summary,
@@ -27,19 +37,19 @@ def project_page_representer(dumper, data):
     return dumper.represent_mapping("!ProjectPage", data_dict)
 
 
-def organization_representer(dumper, data):
+def organization_representer(dumper: yaml.Dumper, data: Organization) -> Any:
     return dumper.represent_mapping(
         "!Organization", {"name": data.name, "url": data.url}
     )
 
 
-def image_representer(dumper, data):
+def image_representer(dumper: yaml.Dumper, data: Image):
     return dumper.represent_mapping(
         "!Image", {"path": data.path, "caption": data.caption}
     )
 
 
-def social_representer(dumper, data):
+def social_representer(dumper: yaml.Dumper, data: Social):
     return dumper.represent_mapping(
         "!Social",
         {
@@ -50,6 +60,13 @@ def social_representer(dumper, data):
     )
 
 
+def menu_representer(dumper: yaml.Dumper, data: Menu):
+    return dumper.represent_mapping(
+        "!Menu",
+        {"main": data.main},
+    )
+
+
 def get_dumper():
     """Add representers to a YAML seriailizer."""
     safe_dumper = yaml.Dumper
@@ -57,11 +74,12 @@ def get_dumper():
     safe_dumper.add_representer(Organization, organization_representer)
     safe_dumper.add_representer(Image, image_representer)
     safe_dumper.add_representer(Social, social_representer)
+    safe_dumper.add_representer(Menu, menu_representer)
     return safe_dumper
 
 
-def dump_yaml(resource: Resource) -> str:
-    return yaml.dump(resource, Dumper=get_dumper(), sort_keys=True)
+def dump_yaml(page: Page) -> str:
+    return yaml.dump(page, Dumper=get_dumper(), sort_keys=True)
 
 
 def create_directory(path: pathlib.Path) -> pathlib.Path:
@@ -85,3 +103,11 @@ def sanitanize_name(name: str) -> str:
     """Sanitize a name for use in a directory name."""
     # remove non-alphanumeric characters
     return re.sub(r"\W+", "", name).lower()
+
+
+def get_fall_starting_date(current_year: int) -> str:
+    return datetime.datetime(current_year, 8, 1).strftime(DATE_YEAR_FORMAT)
+
+
+def get_spring_starting_date(current_year: int) -> str:
+    return datetime.datetime(current_year, 1, 1).strftime(DATE_YEAR_FORMAT)

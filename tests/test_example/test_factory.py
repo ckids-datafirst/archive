@@ -1,5 +1,5 @@
-from datafest_archive.database.factory import ProjectFactory
-from datafest_archive.database.models import Project
+from datafest_archive.models.database import Project
+from tests.test_example.data.factory import ProjectFactory
 
 
 def test_hello():

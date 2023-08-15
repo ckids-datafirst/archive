@@ -1,5 +1,5 @@
-from datafest_archive.database.factory import ProjectFactory
-from datafest_archive.page_builder import generate_project_page
+from datafest_archive.builder.page_builder import generate_project_page
+from tests.test_example.data.factory import ProjectFactory
 
 
 def test_build_project_page_test():

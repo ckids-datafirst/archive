@@ -1,6 +1,9 @@
-from typing import List, Optional, Union
+from typing import List, Union
 
 from dataclasses import dataclass
+from enum import Enum
+
+from datafest_archive.constants import FALL, SPRING, SUMMER, WINTER
 
 
 @dataclass
@@ -55,6 +58,13 @@ class Project:
     topic: list[Topic]
     students: list[Student]
     advisors: list[Advisor]
+
+
+class Semesters(Enum):
+    FALL = FALL
+    WINTER = WINTER
+    SPRING = SPRING
+    SUMMER = SUMMER
 
 
 @dataclass
