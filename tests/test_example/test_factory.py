@@ -1,19 +1,5 @@
-from typing import List
-
-import dataclasses
-import json
-
-import pytest
-
-from datafest_archive.database.factory import ProjectFactory
-from datafest_archive.database.models import (
-    Advisor,
-    Award,
-    Project,
-    SkillOrSoftware,
-    Student,
-    Topic,
-)
+from datafest_archive.models.database import Project
+from tests.test_example.data.factory import ProjectFactory
 
 
 def test_hello():
@@ -27,9 +13,3 @@ def test_hello():
     assert isinstance(result.year, int)
     assert isinstance(result.project_overview, str)
     assert isinstance(result.final_presentation, str)
-    with open("dump.json", "w") as f:
-        f.write(json.dumps(dataclasses.asdict(result)))
-    # assert isinstance(result.skill_required, List[SkillOrSoftware])
-    # assert isinstance(result.topic, List[Topic])
-    # assert isinstance(result.students, List[Student])
-    # assert isinstance(result.advisors, List[Advisor])

@@ -1,0 +1,92 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "$ref": "#/definitions/Welcome3",
+  "definitions": {
+    "Welcome3": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "summary": {
+          "type": "string"
+        },
+        "authors": {
+          "type": "array",
+          "items": {}
+        },
+        "tags": {
+          "type": "array",
+          "items": {}
+        },
+        "categories": {
+          "type": "array",
+          "items": {}
+        },
+        "date": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "weight": {
+          "type": "integer"
+        },
+        "external_link": {
+          "type": "string"
+        },
+        "image": {
+          "$ref": "#/definitions/Image"
+        },
+        "url_code": {
+          "type": "string"
+        },
+        "url_pdf": {
+          "type": "string"
+        },
+        "url_slides": {
+          "type": "string"
+        },
+        "url_video": {
+          "type": "string"
+        },
+        "slides": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "authors",
+        "categories",
+        "date",
+        "external_link",
+        "image",
+        "slides",
+        "summary",
+        "tags",
+        "title",
+        "url_code",
+        "url_pdf",
+        "url_slides",
+        "url_video",
+        "weight"
+      ],
+      "title": "Welcome3"
+    },
+    "Image": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "caption": {
+          "type": "string"
+        },
+        "focal_point": {
+          "type": "string"
+        },
+        "preview_only": {
+          "type": "boolean"
+        }
+      },
+      "required": ["caption", "focal_point", "preview_only"],
+      "title": "Image"
+    }
+  }
+}
