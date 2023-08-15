@@ -7,7 +7,14 @@ CONTENT_PROJECT_DIRECTORY = "projects"
 CONFIG_DIRECTORY = "config"
 INDEX_REGULAR_PAGE = "index.md"
 INDEX_LIST_PAGE = "_index.md"
+EDITION_PEOPLE_PAGE = "people.md"
+EDITION_PROJECTS_WINNER_PAGE = "projects-winner.md"
+EDITION_PROJECTS_PAGE = "projects.md"
+
+FEATURED_TAG_NAME = "Award-Winning Projects"
+ALL_TAG_NAME = "All Projects"
 FEATURED_TAG = "featured"
+ALL_TAG = "*"
 MENUS_FILE_NAME = "menus.yaml"
 
 ROLE_ADVISOR = "Advisor"
@@ -21,6 +28,7 @@ SPRING = "Spring"
 SUMMER = "Summer"
 FALL = "Fall"
 
+PREVIOUS_SEMESTERS_NAME = "Previous Semesters"
 # Menu items for the main menu
 
 info_for_advisors = MenuItem(
@@ -29,6 +37,8 @@ info_for_advisors = MenuItem(
 info_for_students = MenuItem(
     name="Info for Students", url="info-students", weight=2, parent=None
 )
-projects = MenuItem(name="Projects", url="projects", weight=3, parent=None)
+projects = MenuItem(
+    name=PREVIOUS_SEMESTERS_NAME, url="previous-semesters", weight=3, parent=None
+)
 people = MenuItem(name="People", url="people", weight=4, parent=None)
 contact = MenuItem(name="Contact", url="contact", weight=6, parent=None)
