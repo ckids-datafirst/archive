@@ -4,6 +4,7 @@ import yaml
 
 from datafest_archive.builder.edition_page_builder import generate_edition_url
 from datafest_archive.constants import (
+    PREVIOUS_SEMESTERS_NAME,
     contact,
     info_for_advisors,
     info_for_students,
@@ -29,11 +30,13 @@ def generate_menu(editions: list[Edition]) -> str:
 
 def generate_menu_item(editions: list[Edition]) -> list[MenuItem]:
     menu_items: list[MenuItem] = []
-    weight = 1
+    weight = 20
+    # sort editions by year
+    editions.sort(key=lambda x: x.year, reverse=True)
     for edition in editions:
         name = f"{edition.semester} {edition.year}"
         url_name = generate_edition_url(edition.year, edition.semester)
-        menu_item = MenuItem(name, url_name, weight, "Previous Projects")
+        menu_item = MenuItem(name, url_name, weight, PREVIOUS_SEMESTERS_NAME)
         menu_items.append(menu_item)
         weight += 1
     return menu_items

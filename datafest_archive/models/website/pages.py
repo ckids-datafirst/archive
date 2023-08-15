@@ -99,19 +99,60 @@ class Filters:
 
 
 @dataclass
-class Portafolio:
+class FilterButton:
+    name: str
+    tag: str
+    weight: int
+
+
+@dataclass
+class PortfolioWidget:
     title: str
     filters: Filters
     sort_by: str
     sort_ascending: bool
     default_button_index: int
+    filter_button: list[FilterButton]
 
 
 @dataclass
 class Block:
     id: str
     block: str
-    content: Portafolio
+    content: PortfolioWidget
+
+
+@dataclass
+class PeopleContent:
+    user_groups: list[str]
+
+
+@dataclass
+class PeopleWidget:
+    title: str
+    subtitle: str
+    date: str
+    headless: bool
+    widget: str
+    content: PeopleContent
+
+
+@dataclass
+class DesignWidget:
+    show_interests: Optional[bool]
+    show_role: Optional[bool]
+    show_social: Optional[bool]
+
+
+@dataclass
+class WidgetPage:
+    title: str
+    subtitle: str
+    date: str
+    headless: bool
+    type: str
+    widget: str
+    content: PortfolioWidget
 
 
 @dataclass
