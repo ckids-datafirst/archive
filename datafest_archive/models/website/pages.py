@@ -108,12 +108,10 @@ class Portafolio:
 
 
 @dataclass
-class BlockPortafolio:
+class Block:
     id: str
+    block: str
     content: Portafolio
-
-
-Sections = Union[Portafolio]
 
 
 @dataclass
@@ -121,7 +119,7 @@ class ComplexPage:
     title: str
     date: str
     type: str
-    sections: list[Sections]
+    sections: list[Block]
 
 
 Page = Union[PeoplePage, ProjectPage, SimplePage]

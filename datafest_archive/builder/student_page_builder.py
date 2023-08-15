@@ -32,7 +32,7 @@ def build_student_structured_section(student: Student) -> PeoplePage:
     student_page = PeoplePage(
         first_name=first_name,
         last_name=last_name,
-        title=None,
+        title=student.name,
         role=ROLE_STUDENT,
         user_groups=[ROLE_STUDENT],
         social=[email],

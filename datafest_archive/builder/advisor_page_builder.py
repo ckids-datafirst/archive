@@ -18,7 +18,7 @@ def build_advisor_structured_section(advisor: Advisor) -> PeoplePage:
 
     first_name, last_name = full_name_to_first_and_last_name(advisor.name)
     advisor_page = PeoplePage(
-        title=None,
+        title=advisor.name,
         first_name=first_name,
         last_name=last_name,
         role=ROLE_ADVISOR,

@@ -4,7 +4,12 @@ import yaml
 
 from datafest_archive.constants import CONTENT_EDITION_DIRECTORY, INDEX_REGULAR_PAGE
 from datafest_archive.models.database import Edition, Semesters
-from datafest_archive.models.website.pages import ComplexPage, Filters, Portafolio
+from datafest_archive.models.website.pages import (
+    Block,
+    ComplexPage,
+    Filters,
+    Portafolio,
+)
 from datafest_archive.utils import (
     create_directory,
     get_fall_starting_date,
@@ -43,14 +48,17 @@ def generate_edition_content(edition: Edition) -> str:
     section = Portafolio(
         title=f"{edition.semester} {edition.year} Projects",
         filters=filters,
-        sort_by="name",
+        sort_by="Title",
         sort_ascending=False,
         default_button_index=0,
     )
+    block = Block(block="portfolio", id="portfolio", content=section)
     edition_page = ComplexPage(
         title=f"{edition.semester} {edition.year}",
         date=date_created,
         type="landing",
-        sections=[section],
+        sections=[block],
     )
-    return yaml.dump(edition_page)
+    structured_content = yaml.dump(edition_page)
+    unstructured_content = ""
+    return f"---\n{structured_content}\n---\n{unstructured_content}"

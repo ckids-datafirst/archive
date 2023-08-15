@@ -79,7 +79,7 @@ def get_dumper():
 
 
 def dump_yaml(page: Page) -> str:
-    return yaml.dump(page, Dumper=get_dumper(), sort_keys=True)
+    return yaml.dump(page, Dumper=get_dumper())
 
 
 def create_directory(path: pathlib.Path) -> pathlib.Path:
