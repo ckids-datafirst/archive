@@ -1,7 +1,7 @@
 from datafest_archive.constants import ROLE_ADVISOR
 from datafest_archive.models.database import Advisor
 from datafest_archive.models.website.pages import Organization, PeoplePage, Social
-from datafest_archive.utils import dump_yaml
+from datafest_archive.utils import dump_yaml, full_name_to_first_and_last_name
 
 
 def build_advisor_structured_section(advisor: Advisor) -> PeoplePage:
@@ -16,8 +16,11 @@ def build_advisor_structured_section(advisor: Advisor) -> PeoplePage:
         url=None,
     )
 
+    first_name, last_name = full_name_to_first_and_last_name(advisor.name)
     advisor_page = PeoplePage(
-        title=advisor.name,
+        title=None,
+        first_name=first_name,
+        last_name=last_name,
         role=ROLE_ADVISOR,
         user_groups=[ROLE_ADVISOR],
         social=[email],

@@ -40,8 +40,10 @@ class Education:
 
 @dataclass
 class PeoplePage:
-    title: str
+    title: Optional[str]
     role: str
+    first_name: str
+    last_name: str
     user_groups: list[str]
     social: list[Social]
     bio: str

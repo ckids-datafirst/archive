@@ -3,8 +3,6 @@ from typing import List
 import logging
 from pathlib import Path
 
-import yaml
-
 from datafest_archive.builder.edition_page_builder import generate_edition_directory
 from datafest_archive.builder.menu_builder import generate_menu
 from datafest_archive.builder.page_builder import (
