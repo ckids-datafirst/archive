@@ -1,7 +1,7 @@
 from datafest_archive.constants import ROLE_STUDENT
 from datafest_archive.models.database import Student
 from datafest_archive.models.website.pages import Course, Education, PeoplePage, Social
-from datafest_archive.utils import dump_yaml
+from datafest_archive.utils import dump_yaml, full_name_to_first_and_last_name
 
 
 def generate_student_page(student: Student) -> str:
@@ -28,8 +28,11 @@ def build_student_structured_section(student: Student) -> PeoplePage:
         ]
     )
 
+    first_name, last_name = full_name_to_first_and_last_name(student.name)
     student_page = PeoplePage(
-        title=student.name,
+        first_name=first_name,
+        last_name=last_name,
+        title=None,
         role=ROLE_STUDENT,
         user_groups=[ROLE_STUDENT],
         social=[email],

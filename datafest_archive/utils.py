@@ -105,6 +105,19 @@ def sanitanize_name(name: str) -> str:
     return re.sub(r"\W+", "", name).lower()
 
 
+def people_name_to_directory_name(first_name: str, last_name: str) -> str:
+    """Convert a person's name to a directory name."""
+    return f"{sanitanize_name(first_name)}-{sanitanize_name(last_name)}"
+
+
+def full_name_to_first_and_last_name(full_name: str) -> tuple[str, str]:
+    """Convert a person's full name to a first and last name."""
+    split_name = full_name.split(" ")
+    first_name = split_name[0]
+    last_name = " ".join(split_name[1:])
+    return first_name, last_name
+
+
 def get_fall_starting_date(current_year: int) -> str:
     return datetime.datetime(current_year, 8, 1).strftime(DATE_YEAR_FORMAT)
 

@@ -15,7 +15,11 @@ from datafest_archive.constants import (
 )
 from datafest_archive.models.database import Advisor, Project, Resource, Student
 from datafest_archive.models.website.pages import SimplePage
-from datafest_archive.utils import create_directory
+from datafest_archive.utils import (
+    create_directory,
+    full_name_to_first_and_last_name,
+    people_name_to_directory_name,
+)
 
 
 def get_resource_path(resource: Resource, parent_directory: Path) -> Path:
@@ -28,7 +32,8 @@ def get_resource_path(resource: Resource, parent_directory: Path) -> Path:
 
 
 def create_advisor(advisor: Advisor, parent_directory: Path):
-    directory_name = f"student_{str(advisor.id)}"
+    first_name, last_name = full_name_to_first_and_last_name(advisor.name)
+    directory_name = people_name_to_directory_name(first_name, last_name)
     advisor_directory = create_directory(
         parent_directory / CONTENT_PEOPLE_DIRECTORY / directory_name
     )
@@ -36,7 +41,8 @@ def create_advisor(advisor: Advisor, parent_directory: Path):
 
 
 def create_student(student: Student, parent_directory: Path):
-    directory_name = f"student_{str(student.id)}"
+    first_name, last_name = full_name_to_first_and_last_name(student.name)
+    directory_name = people_name_to_directory_name(first_name, last_name)
     student_directory = create_directory(
         parent_directory / CONTENT_PEOPLE_DIRECTORY / directory_name
     )
