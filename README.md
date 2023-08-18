@@ -24,6 +24,32 @@ git clone https://github.com/ckids-datafirst/archive.git
 poetry run datafest-archive --help
 ```
 
+## Usage
+
+```bash
+$ poetry run datafest-archive generate --help
+
+ Usage: datafest-archive generate [OPTIONS] INPUT_PATH WEBSITE_OUTPUT_DIRECTORY
+
+Arguments
+* path INPUT_PATH  The input path to use. Depends on the type. [default: None] [required]
+* website_output_directory PATH The directory to output the website to. [default: None] [required]
+
+Options
+* --input-type [json]  The type of website to generate. [default: None] [required]
+   --help                      Show this message and exit.
+```
+
+### Example
+
+Generate the website from the JSON files in the `datafest-archive/data` directory and output the website to the `datafest-archive/website` directory.
+
+```bash
+$ poetry run datafest-archive generate --input-type json --input-path datafest-archive/data --website-output-directory datafest-archive/website
+```
+
+The directory structure of the data directory should look like [this example](tests/input_data/json/2022-fall.json)
+
 ## Development documentation
 
 Refer to [README-dev.md](README-dev.md) for development documentation.

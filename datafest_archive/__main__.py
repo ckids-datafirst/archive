@@ -1,9 +1,7 @@
-# type: ignore[attr-defined]
-from typing import Annotated, Optional
+from typing import Annotated
 
 from enum import Enum
 from pathlib import Path
-from random import choice
 
 import typer
 from rich.console import Console
@@ -12,20 +10,10 @@ from datafest_archive import version
 from datafest_archive.reader.json_reader import handle_json
 
 
-class Color(str, Enum):
-    white = "white"
-    red = "red"
-    cyan = "cyan"
-    magenta = "magenta"
-    yellow = "yellow"
-    green = "green"
-
-
 class Reader(str, Enum):
     """The type of reader to use."""
 
     json = "json"
-    sqlite = "sqlite"
 
 
 app = typer.Typer(
@@ -74,8 +62,6 @@ def generate(
 ) -> None:
     if input_type == Reader.json:
         handle_json(path, website_output_directory)
-    elif input_type == Reader.sqlite:
-        handle_sqlite(path, website_output_directory)
 
 
 if __name__ == "__main__":
