@@ -34,7 +34,6 @@ def build_advisor_structured_section(advisor: Advisor) -> PeoplePage:
 
 def build_advisor_unstructured_section(advisor: Advisor) -> str:
     return f"""
-    ## Links
     """
 
 

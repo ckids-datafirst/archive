@@ -17,11 +17,17 @@ def generate_datetime_from_project(project: Project) -> DateTimeNone:
 
 
 def build_project_structed_section(project: Project) -> ProjectPage:
-    students = [student.name for student in project.students]
-    advisors = [advisor.name for advisor in project.advisors]
+    students = (
+        [student.name for student in project.students] if project.students else []
+    )
+    advisors = (
+        [advisor.name for advisor in project.advisors] if project.advisors else []
+    )
     authors = students + advisors
     edition = f"{project.semester} {project.year}"
-    tags = [edition] + [topic.name for topic in project.topic]
+    topics = [topic.name for topic in project.topic] if project.topic else []
+    tags = [edition] + topics
+
     if project.awards:
         tags.append(FEATURED_TAG)
         for award in project.awards:
@@ -49,7 +55,7 @@ def build_project_structed_section(project: Project) -> ProjectPage:
 
 def build_project_unstructed_section(project: Project) -> str:
     return f"""
-    {project.project_overview}
+{project.project_overview}
     """
 
 

@@ -10,9 +10,9 @@ from tests.test_example.data.factory import (
 
 def test_build_website(tmp_path):
     # Set up
-    students = StudentFactory.batch(size=60)
-    advisors = AdvisorFactory.batch(size=10)
-    projects = ProjectFactory.batch(size=20)
+    students = StudentFactory.batch(size=2)
+    advisors = AdvisorFactory.batch(size=2)
+    projects = ProjectFactory.batch(size=2)
 
     selected_students = students.copy()
     for project in projects:

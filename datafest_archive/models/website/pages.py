@@ -138,6 +138,12 @@ class PeopleWidget:
 
 
 @dataclass
+class DesignProject:
+    columns: str = "2"
+    view: str = "card"
+
+
+@dataclass
 class DesignWidget:
     show_interests: Optional[bool]
     show_role: Optional[bool]
@@ -153,6 +159,7 @@ class WidgetPage:
     type: str
     widget: str
     content: PortfolioWidget
+    design: DesignProject
 
 
 @dataclass

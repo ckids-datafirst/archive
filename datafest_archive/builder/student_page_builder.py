@@ -18,15 +18,18 @@ def build_student_structured_section(student: Student) -> PeoplePage:
         link=student.email,
     )
 
-    education: Education = Education(
-        courses=[
-            Course(
-                course=student.degree_program,
-                institution=student.school,
-                year=None,
-            )
-        ]
-    )
+    if student.degree_program is None and student.school is None:
+        education = None
+    else:
+        education: Education = Education(
+            courses=[
+                Course(
+                    course=student.degree_program,
+                    institution=student.school,
+                    year=None,
+                )
+            ]
+        )
 
     first_name, last_name = full_name_to_first_and_last_name(student.name)
     student_page = PeoplePage(
@@ -46,5 +49,4 @@ def build_student_structured_section(student: Student) -> PeoplePage:
 
 def build_student_unstructured_section(student: Student) -> str:
     return f"""
-    {student.name}
     """
