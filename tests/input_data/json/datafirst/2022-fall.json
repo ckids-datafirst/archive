@@ -1,0 +1,389 @@
+{
+  "projects": [
+    {
+      "id": 1,
+      "semester": "Spring",
+      "year": 2023,
+      "name": "Determinants of spatial variations in broadband quality and prices",
+      "projectOverview": "There is anecdotal evidence that broadband service offers vary in quality and price along income and racial lines. This project seeks to validate these claims by collecting data about service speeds and prices for all known serviceable locations in Los Angeles County, and merging with sociodemographic variables from the Census Bureau and other sources. Other researchers have already developed prototype code for scraping data from ISP's websites, but the study only covered a small percentage of addresses in LA County. The analysis will probe for evidence of a \"poverty penalty\" whereby residents of poorer areas in Los Angeles are offered higher cost/lower quality broadband services.",
+      "advisors": [
+        {
+          "id": "1",
+          "name": "Hernan Galperin",
+          "email": "hgalperi@usc.edu",
+          "title": null,
+          "primary_school": null,
+          "organization": null
+        }
+      ],
+      "students": [
+        { "id": 12, "email": "weiqianz@usc.edu", "name": "Weiqian Zhang" },
+        { "id": 13, "email": "amassari@usc.edu", "name": "Aurora Massari" },
+        {
+          "id": 14,
+          "email": "chavezpe@usc.edu",
+          "name": "Angel Chavez-Penate"
+        },
+        { "id": 15, "email": "zironghu@usc.edu", "name": "Zirong Huang" },
+        { "id": 16, "email": "mushuni@usc.edu", "name": "Mahika Mushuni" },
+        { "id": 17, "email": "caolei@usc.edu", "name": "Lei Cao" }
+      ],
+
+      "skillRequired": [
+        {
+          "id": "1",
+          "name": "Python",
+          "type": "software"
+        },
+        {
+          "id": "2",
+          "name": "Statistics/econometrics",
+          "type": "software"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "semester": "Spring",
+      "year": 2023,
+      "name": "Auditing web content promoting eating disorders",
+      "projectOverview": "The pandemic worsened eating disorders among adolescents, particularly girls. Eating disorders, a psychiatric illness where an adolescent tries to control their weight with severe food restriction (anorexia) or purging (bulimia), can be fatal. How much does web content and algorithms that power web search contribute to eating disorders?  Imagine a girl who is unhappy about her weight and looks for dieting tips online. It does not take long for search algorithms to lead her to extreme content that promotes anorexia and extreme weight loss. The goal of this project is to audit the web for potentially harmful content and communities that promote eating disorders. ",
+      "advisors": [
+        {
+          "name": "Kristina Lerman",
+          "email": "lerman@isi.edu"
+        }
+      ],
+      "students": [
+        { "id": 25, "email": "akarnati@usc.edu", "name": "Aryan Karnati" },
+        { "id": 26, "email": "santhosh@usc.edu", "name": "Sudesh Kumar" },
+        { "id": 27, "email": "chensiyi@usc.edu", "name": "Siyi Chen" },
+        { "id": 28, "email": "zhoushuc@usc.edu", "name": "Shuchan Zhou" }
+      ],
+      "skillRequired": [
+        {
+          "id": "1",
+          "name": "Python",
+          "type": "software"
+        },
+        {
+          "id": "3",
+          "name": "Web scraping",
+          "type": "software"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "semester": "Spring",
+      "year": 2023,
+      "name": "Human Bio-signals as a Function of Indoor Air Quality Control for Human Health in Buildings",
+      "projectOverview": "After the COVID, the remote work environment has become popular, and many commercial offices have tried to keep both the in-person work environment and the remote work environment while attempting to reduce the size of their workplaces. Even though hot desking systems are increasingly common and even starting to feel like a trend these days, there isn't much data to show how such systems can support occupants' environmental comfort, work productivity, and psychological stability while they are at work. Therefore, this project focuses on investigating how much the occupants are satisfied with their new workplace platform and how much a hotdesking system affects their work productivity, environmental satisfaction, etc.  The project's findings will help design this new desking system in a way that will increase occupants' satisfaction with their surroundings and productivity at work without compromising their quality of life in the workplace.",
+      "students": [
+        { "id": 23, "email": "yanlizha@usc.edu", "name": "Yanli Zhang" },
+        {
+          "id": 24,
+          "email": "smathana@usc.edu",
+          "name": "Sowmiya Mathanagopalan"
+        }
+      ],
+      "advisors": [
+        {
+          "title": null,
+          "primary_school": null,
+          "organization": null,
+          "name": "Joon-Ho Choi",
+          "email": "joonhoch@usc.edu"
+        }
+      ],
+      "skillRequired": [
+        {
+          "name": "Statistics",
+          "type": "software"
+        },
+        {
+          "name": "R",
+          "type": "software"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "semester": "Spring",
+      "year": 2023,
+      "name": "Networked social influence in large-scale networks",
+      "projectOverview": "We recently published a novel algorithm for measuring influence among people. What's different about it is that it doesn't rely on social media. It takes behavior data, such as might exist within a company's databases, and is able to say \"This person is causing this person to do X.\" This technique is broad and powerful and has many social and business applications. We're also fortunate to have a lot of data from corporations to explore, including over a 100m person dataset on charitable giving, several datasets of video game play, and one on commercial travel. What we need are smart students who can learn the algorithm and help us run it, answering questions of both scholarly and commercial interest. We need horsepower, and we're happy to help train, advise and add students to the many publications we see coming out of this effort.",
+      "students": [
+        {
+          "id": 29,
+          "email": "panchang@usc.edu",
+          "name": "Indrani Panchangam"
+        },
+        { "id": 30, "email": "canjin@usc.edu", "name": "Can Jin" },
+        { "id": 31, "email": "yunningc@usc.edu", "name": "Yunning Chen" },
+        { "id": 32, "email": "dattpate@usc.edu", "name": "Datt Patel" },
+        { "id": 33, "email": "kaiyisun@usc.edu", "name": "Kaiyi Sun" },
+        { "id": 34, "email": "caolei@usc.edu", "name": "Lei Cao" },
+        { "id": 35, "email": "nishimit@usc.edu", "name": "Nishi Doshi" },
+        { "id": 36, "email": "yingning@usc.edu", "name": "Yingning Fan" }
+      ],
+      "advisors": [
+        {
+          "name": "Aimei Yang",
+          "email": "aimei.yang@usc.edu"
+        },
+        {
+          "name": "Dmitri Williams"
+        }
+      ],
+      "skillRequired": [
+        {
+          "name": "Python",
+          "type": "software"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "semester": "Spring",
+      "year": 2023,
+      "name": "Event Forecasting using Efficient and Expressive Temporal Knowledge Graph",
+      "projectOverview": "Temporal Knowledge Graph (TKG) models incorporate temporal aspects of facts into their graph neural networks (GNNs) learning processes to predict temporally conditioned facts. These models capture the temporal dynamics of the facts well and are well-suited for temporally conditioned graph completion tasks. However, there remain many open issues that need to be addressed to make it more practical for real-world applications: (1) Real-world problems usually do not conform to the graph completion tasks which fill out the missing element in a fact; (2) Sparse graph due to lack of temporal triples for target task leads to poor performance; (3) Temporal graphs are inherently dynamic entities that grow and change over time but most existing models require computationally expensive training from scratch to incorporate these changes. Thus, we propose to design an efficient event forecasting framework that solves such challenges.",
+      "advisors": [
+        {
+          "name": "Dong-Ho Lee",
+          "email": "dongho.lee@usc.edu"
+        },
+        {
+          "name": "Kian Ahrabian"
+        }
+      ],
+      "students": [
+        { "id": 18, "email": "prohilla@usc.edu", "name": "Parth Rohilla" },
+        { "id": 19, "email": "vnarahar@usc.edu", "name": "Kiran Narahari" },
+        { "id": 20, "email": "hangjihe@usc.edu", "name": "Hangji He" },
+        { "id": 21, "email": "sgujar@usc.edu", "name": "Shubham Gujar" },
+        { "id": 22, "email": "varunven@usc.edu", "name": "Varun Venkatesh" }
+      ],
+      "skillRequired": [
+        {
+          "name": "Python",
+          "type": "software"
+        },
+        {
+          "name": "PyTorch",
+          "type": "software"
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "semester": "Spring",
+      "year": 2023,
+      "name": "Identifying Causal Pathways from Online to Offline Systems",
+      "projectOverview": " Students will learn to collect and analyze data in the goal of identifying causal pathways between online and offline systems. Video games, present a rich set of opportunities for this analysis, and we will begin by studying them. We will start with the effect that video games have on culture, movement, and discussion offline. We will then transition to Reddit activity, where certain communities can spur offline action. Students will not only collect data, but apply state-of-the-art causal detection algorithms alongside PhD students studying the same phenomena.",
+      "advisors": [
+        {
+          "name": "Fred Morstatter",
+          "email": "fredmors@isi.edu"
+        }
+      ],
+      "students": [
+        { "id": 7, "email": "ywang447@usc.edu", "name": "Yufei Wang" },
+        { "id": 8, "email": "kaixingu@usc.edu", "name": "Kaixin Guo" },
+        { "id": 9, "email": "esjin@usc.edu", "name": "Emerson Jin" },
+        { "id": 10, "email": "seoyoun@usc.edu", "name": "Seoyoun Kim" },
+        { "id": 11, "email": "haohanwa@usc.edu", "name": "Haohan Wang" }
+      ],
+      "skillRequired": [
+        {
+          "name": "Python",
+          "type": "software"
+        },
+        {
+          "name": "Web Crawling",
+          "type": "software"
+        },
+        {
+          "name": "Communication",
+          "type": "soft"
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "semester": "Spring",
+      "year": 2023,
+      "name": "The value of player tracking technology in assessment of training volume in youth soccer players",
+      "projectOverview": "Wearable IMU and GPS sensors are used to estimate training volume in professional sports to ensure adequate preparation for competition. Recommendations to modify training is individualized to meet health and performance needs of each player. Expense associated with these systems restrict their use in youth sports. More economical alternatives are available but it is not clear if the data is comparable. This project will compare data collected concurrently to determine if the economical system provides similar conclusions. Players from the LA Galaxy (second and developmental teams) will participate. Continuous data from triaxial accelerometers, gyroscope and GPS will be collected during practice and competition. Raw data and commercially derived key performance indicators will be compared to understand the agreement between the systems. Acceptable agreement with comparable interpretation of data with respect to training recommendations may allow for greater access for young athletes",
+      "students": [
+        { "id": 1, "email": "ajaykc@usc.edu", "name": "Ajay Kc" },
+        { "id": 2, "email": "nazirkar@usc.edu", "name": "Shardul Nazirkar" }
+      ],
+      "advisors": [
+        {
+          "name": "Susan Sigward",
+          "email": "sigward@usc.edu"
+        }
+      ],
+      "skillRequired": [
+        {
+          "name": "Data programming (R, Python, MatLab)",
+          "type": "software"
+        },
+        {
+          "name": "Statistics",
+          "type": "software"
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "semester": "Spring",
+      "year": 2023,
+      "name": "Transition of Care",
+      "projectOverview": "Analytics to determine what tertiary and quaternary care patients would have the best outcomes at Keck Medical Center. Analyze data from incoming transfer patients to look at data quality, evaluate clinical records and predict outcomes.",
+      "students": [
+        { "id": 3, "email": "yzheng08@usc.edu", "name": "Yan Zheng" },
+        { "id": 4, "email": "yuanluo@usc.edu", "name": "Yuan Luo" }
+      ],
+      "advisors": [
+        {
+          "name": "Neil Bahroos",
+          "email": "jennifer.see@med.usc.edu"
+        }
+      ],
+      "skillRequired": [
+        {
+          "name": "R",
+          "type": "software"
+        },
+        {
+          "name": "Python",
+          "type": "software"
+        },
+        {
+          "name": "Statistics",
+          "type": "software"
+        },
+        {
+          "name": "NLP",
+          "type": "software"
+        },
+        {
+          "name": "Machine learning",
+          "type": "software"
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "semester": "Spring",
+      "year": 2023,
+      "name": "Natural language processing of safety reports in nuclear plants and aviation",
+      "projectOverview": "This project will focus on extracting concise structured information about incidents in nuclear plants and in aviation that are currently described in lengthy document reports.  By structuring this information and mapping it to safety models and standards, we can help improve their operations.",
+      "advisors": [
+        {
+          "name": "Yolanda Gil",
+          "email": "gil@isi.edu"
+        },
+        {
+          "name": "Najmedin Meshkati",
+          "email": "meshkati@usc.edu"
+        }
+      ],
+      "students": [
+        {
+          "id": 37,
+          "email": "alkathee@usc.edu",
+          "name": "Anood Alkhatheeri"
+        },
+        { "id": 38, "email": "rushitgi@usc.edu", "name": "Rushit Jain" },
+        { "id": 39, "email": "saxenasa@usc.edu", "name": "Samarth Saxena" },
+        { "id": 40, "email": "aphalak@usc.edu", "name": "Abishek Phalak" },
+        {
+          "id": 41,
+          "email": "neshatva@usc.edu",
+          "name": "Yassamin Neshatvar"
+        },
+        {
+          "id": 42,
+          "email": "shruthak@usc.edu",
+          "name": "Shruthakeerthy Srinivasan"
+        },
+        { "id": 43, "email": "vatsaraj@usc.edu", "name": "Vaidehi Vatsaraj" },
+        {
+          "id": 44,
+          "email": "sr88018@usc.edu",
+          "name": "Siddarth Rudraraju"
+        },
+        { "id": 45, "email": "gordo@usc.edu", "name": "Iris Gordo" },
+        { "id": 46, "email": "shwu@usc.edu", "name": "Shelby Wu" }
+      ],
+      "skillRequired": [
+        {
+          "name": "R",
+          "type": "software"
+        },
+        {
+          "name": "Python",
+          "type": "software"
+        },
+        {
+          "name": "Statistics",
+          "type": "software"
+        },
+        {
+          "name": "NLP",
+          "type": "software"
+        },
+        {
+          "name": "Machine learning",
+          "type": "software"
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "semester": "Spring",
+      "year": 2023,
+      "name": "Predicting the possibility of escalation of care for specific cohorts admitted to ICU",
+      "projectOverview": "To predict the possibility of escalation of care for specific cohorts admitted to Keck ICU,), on the following: Increase in pressors, Intubation, Trip to operating room within 24 hours, Starting dialysis The objective is to predict on a real-time/near real-time basis, whether someone is likely to require escalated care as defined above. Prediction of the likelihood of such a care escalation need is assumed to be an optional/secondary requirement at this stage.",
+      "students": [
+        { "id": 5, "email": "hwko@usc.edu", "name": "Ho Ko" },
+        { "id": 6, "email": "khandor@usc.edu", "name": "Vatsal Khandor" }
+      ],
+      "advisors": [
+        {
+          "name": "Mayil Dharmarajan"
+        },
+        {
+          "name": "Neil Bahroos",
+          "email": "meshkati@usc.edu"
+        }
+      ],
+      "skillRequired": [
+        {
+          "name": "Data Analysis",
+          "type": "software"
+        },
+        {
+          "name": "SQL",
+          "type": "software"
+        },
+        {
+          "name": "Clinical knowledge",
+          "type": "soft"
+        },
+        {
+          "name": "Statistics",
+          "type": "software"
+        },
+        {
+          "name": "Python & AWS Sagemaker",
+          "type": "software"
+        }
+      ]
+    }
+  ]
+}
