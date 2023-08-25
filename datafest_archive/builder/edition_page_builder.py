@@ -9,13 +9,16 @@ from datafest_archive.constants import (
     EDITION_PEOPLE_PAGE,
     EDITION_PROJECTS_PAGE,
     EDITION_PROJECTS_WINNER_PAGE,
+    EDITION_STUDENTS_PAGE,
     FEATURED_TAG,
     FEATURED_TAG_NAME,
     INDEX_REGULAR_PAGE,
     ROLE_ADVISOR,
+    ROLE_STUDENT,
 )
 from datafest_archive.models.database import Edition, Semesters
 from datafest_archive.models.website.pages import (
+    DesignProject,
     FilterButton,
     Filters,
     PeopleContent,
@@ -49,9 +52,11 @@ def generate_edition_directory(edition: Edition, content_directory: Path):
     with open(project_edition_directory / EDITION_PROJECTS_PAGE, "w") as f:
         f.write(generate_edition_potfolio_page(edition))
     with open(project_edition_directory / EDITION_PEOPLE_PAGE, "w") as f:
-        f.write(generate_edition_people_page(edition))
+        f.write(generate_edition_people_page(edition, ROLE_ADVISOR))
     with open(project_edition_directory / INDEX_REGULAR_PAGE, "w") as f:
         f.write(generate_index_page())
+    with open(project_edition_directory / EDITION_STUDENTS_PAGE, "w") as f:
+        f.write(generate_edition_people_page(edition, ROLE_STUDENT))
 
 
 def generate_index_page() -> str:
@@ -63,9 +68,9 @@ def generate_index_page() -> str:
     return f"---\n{structured_content}\n---\n{unstructured_content}"
 
 
-def generate_edition_people_page(edition: Edition) -> str:
+def generate_edition_people_page(edition: Edition, role: str) -> str:
     content = PeopleContent(
-        user_groups=[ROLE_ADVISOR],
+        user_groups=[role],
     )
     widget_page = PeopleWidget(
         title="Advisors",
@@ -105,6 +110,8 @@ def generate_edition_potfolio_page(
         sort_ascending=False,
         default_button_index=0,
     )
+
+    design = DesignProject()
     portfolio = WidgetPage(
         title=title,
         subtitle=f"{edition.semester} {edition.year}",
@@ -113,6 +120,7 @@ def generate_edition_potfolio_page(
         widget="portfolio",
         content=content,
         headless=True,
+        design=design,
     )
     structured_content = yaml.dump(portfolio)
     unstructured_content = ""

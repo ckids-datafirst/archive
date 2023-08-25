@@ -1,13 +1,15 @@
-from typing import List, Union
+from typing import List, Optional, Union
 
 from dataclasses import dataclass
 from enum import Enum
+
+from dataclass_wizard import JSONWizard
 
 from datafest_archive.constants import FALL, SPRING, SUMMER, WINTER
 
 
 @dataclass
-class Award:
+class Award(JSONWizard):
     id: int
     name: str
     description: str
@@ -15,9 +17,9 @@ class Award:
 
 @dataclass
 class SkillOrSoftware:
-    id: int
     name: str
     type: str
+    id: Optional[int] = None
 
 
 @dataclass
@@ -31,33 +33,34 @@ class Student:
     id: int
     name: str
     email: str
-    degree_program: str
-    school: str
+    degree_program: Optional[str] = None
+    school: Optional[str] = None
 
 
 @dataclass
 class Advisor:
-    id: int
     name: str
-    email: str
-    organization: str
-    title: str
-    primary_school: str
+    email: Optional[str] = None
+
+    organization: Optional[str] = None
+    title: Optional[str] = None
+    primary_school: Optional[str] = None
+    id: Optional[int] = None
 
 
 @dataclass
-class Project:
+class Project(JSONWizard):
     id: int
     name: str
     semester: str
     year: int
     project_overview: str
-    final_presentation: str
-    awards: list[Award]
     skill_required: list[SkillOrSoftware]
-    topic: list[Topic]
-    students: list[Student]
-    advisors: list[Advisor]
+    awards: Optional[list[Award]] = None
+    topic: Optional[list[Topic]] = None
+    students: Optional[list[Student]] = None
+    final_presentation: Optional[str] = None
+    advisors: Optional[list[Advisor]] = None
 
 
 class Semesters(Enum):

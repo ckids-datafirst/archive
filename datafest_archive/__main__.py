@@ -1,24 +1,19 @@
-# type: ignore[attr-defined]
-from typing import Annotated, Optional
+from typing import Annotated
 
 from enum import Enum
 from pathlib import Path
-from random import choice
 
 import typer
 from rich.console import Console
 
 from datafest_archive import version
-from datafest_archive.example import hello
+from datafest_archive.reader.json_reader import handle_json
 
 
-class Color(str, Enum):
-    white = "white"
-    red = "red"
-    cyan = "cyan"
-    magenta = "magenta"
-    yellow = "yellow"
-    green = "green"
+class Reader(str, Enum):
+    """The type of reader to use."""
+
+    json = "json"
 
 
 app = typer.Typer(
@@ -52,21 +47,21 @@ def main(
 
 @app.command()
 def generate(
-    database: Annotated[Path, typer.Argument(help="The database to use.")],
+    path: Annotated[
+        Path,
+        typer.Argument(
+            metavar="INPUT_PATH", help="The input path to use. Depends on the type."
+        ),
+    ],
+    input_type: Annotated[
+        Reader, typer.Option(help="The type of website to generate.")
+    ],
     website_output_directory: Annotated[
         Path, typer.Argument(help="The directory to output the website to.")
     ],
 ) -> None:
-    if not database.exists():
-        console.print(f"[bold red]Database {database} does not exist![/]")
-        raise typer.Exit(code=1)
-    if not website_output_directory.exists():
-        console.print(
-            f"[bold red]Website output directory {website_output_directory} does not exist![/]"
-        )
-        raise typer.Exit(code=1)
-
-    console.print(f"[bold {database}]{website_output_directory}[/]")
+    if input_type == Reader.json:
+        handle_json(path, website_output_directory)
 
 
 if __name__ == "__main__":

@@ -8,6 +8,7 @@ CONFIG_DIRECTORY = "config"
 INDEX_REGULAR_PAGE = "index.md"
 INDEX_LIST_PAGE = "_index.md"
 EDITION_PEOPLE_PAGE = "people.md"
+EDITION_STUDENTS_PAGE = "students.md"
 EDITION_PROJECTS_WINNER_PAGE = "projects-winner.md"
 EDITION_PROJECTS_PAGE = "projects.md"
 

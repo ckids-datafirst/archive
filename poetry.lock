@@ -331,6 +331,24 @@ files = [
 ]
 
 [[package]]
+name = "dataclass-wizard"
+version = "0.22.2"
+description = "Marshal dataclasses to/from JSON. Use field properties with initial values. Construct a dataclass schema with JSON input."
+optional = false
+python-versions = "*"
+files = [
+    {file = "dataclass-wizard-0.22.2.tar.gz", hash = "sha256:211f842e5e9a8ace50ba891ef428cd78c82579fb98024f80f3e630ca8d1946f6"},
+    {file = "dataclass_wizard-0.22.2-py2.py3-none-any.whl", hash = "sha256:49be36ecc64bc5a1e9a35a6bad1d71d33b6b9b06877404931a17c6a3a6dfbb10"},
+]
+
+[package.dependencies]
+typing-extensions = {version = ">=3.7.4.2", markers = "python_version <= \"3.9\""}
+
+[package.extras]
+timedelta = ["pytimeparse (>=1.1.7)"]
+yaml = ["PyYAML (>=5.3)"]
+
+[[package]]
 name = "dill"
 version = "0.3.7"
 description = "serialize all of Python"
@@ -1622,4 +1640,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.9"
-content-hash = "f319d7547cc7b4eb61973057bafb1561f8b9c895ad973f9ee5e77537ad634959"
+content-hash = "1b295015b39129fd8a34e568eb0e1d4fdd9551884ac76c5b9762d17a55f594ea"
