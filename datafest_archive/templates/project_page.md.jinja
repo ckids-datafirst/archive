@@ -1,0 +1,27 @@
+## Description
+
+{{ project.project_overview }}
+
+{% if project.awards %}
+
+## Awards
+
+{%- for award in project.awards %}
+* {{ award.name }}
+{% endfor %}
+{% endif %}
+
+## Students
+
+{% if project.students %}
+{%- for student in project.students -%}
+* {{ student.name }}
+{% endfor %}
+{% endif %}
+
+## Advisors
+{% if project.advisors %}
+{%- for advisor in project.advisors -%}
+* {{ advisor.name }}
+{% endfor %}
+{%- endif -%}

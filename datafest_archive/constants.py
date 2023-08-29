@@ -14,7 +14,7 @@ EDITION_PROJECTS_PAGE = "projects.md"
 
 FEATURED_TAG_NAME = "Award-Winning Projects"
 ALL_TAG_NAME = "All Projects"
-FEATURED_TAG = "featured"
+FEATURED_TAG = "Featured"
 ALL_TAG = "*"
 MENUS_FILE_NAME = "menus.yaml"
 

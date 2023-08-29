@@ -1,3 +1,4 @@
+from datafest_archive.builder.templating import jinja_environment
 from datafest_archive.constants import ROLE_ADVISOR
 from datafest_archive.models.database import Advisor
 from datafest_archive.models.website.pages import Organization, PeoplePage, Social
@@ -8,7 +9,7 @@ def build_advisor_structured_section(advisor: Advisor) -> PeoplePage:
     email: Social = Social(
         icon="envelope",
         icon_pack="fas",
-        link=advisor.email,
+        link=f"mailto:{advisor.email}",
     )
 
     organization: Organization = Organization(
@@ -17,12 +18,17 @@ def build_advisor_structured_section(advisor: Advisor) -> PeoplePage:
     )
 
     first_name, last_name = full_name_to_first_and_last_name(advisor.name)
+
+    users_groups = []
+    if advisor.semesters_participated:
+        for year in advisor.semesters_participated:
+            users_groups.append(f"{ROLE_ADVISOR} ({year})")
     advisor_page = PeoplePage(
         title=advisor.name,
         first_name=first_name,
         last_name=last_name,
         role=ROLE_ADVISOR,
-        user_groups=[ROLE_ADVISOR],
+        user_groups=users_groups,
         social=[email],
         email=advisor.email,
         bio="",
@@ -33,8 +39,11 @@ def build_advisor_structured_section(advisor: Advisor) -> PeoplePage:
 
 
 def build_advisor_unstructured_section(advisor: Advisor) -> str:
-    return f"""
-    """
+    # convert a list of semesters_participated in a markdown items
+    template = jinja_environment.get_template("advisor_page.md.jinja")
+    return template.render(
+        advisor=advisor,
+    )
 
 
 def generate_advisor_page(advisor: Advisor) -> str:

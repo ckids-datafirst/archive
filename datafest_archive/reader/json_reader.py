@@ -4,7 +4,7 @@ import json
 from pathlib import Path
 
 from datafest_archive.builder.website_buider import generate_website
-from datafest_archive.models.database import Advisor, Project, Resource, Student
+from datafest_archive.models.database import Advisor, Project, Resource
 
 PROJECT_KEY = "projects"
 ADVISOR_KEY = "advisors"
@@ -52,4 +52,3 @@ def handle_json(directory: Path, output_directory: Path):
     validate_directory(directory)
     resources = get_resources(directory)
     generate_website(resources, output_directory)
-    pass

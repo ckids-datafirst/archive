@@ -1,7 +1,10 @@
+from typing import List
+
 from datetime import datetime
 
+from datafest_archive.builder.templating import jinja_environment
 from datafest_archive.constants import DATE_YEAR_FORMAT, FEATURED_TAG
-from datafest_archive.models.database import Project
+from datafest_archive.models.database import Award, Project
 from datafest_archive.models.website.pages import DateTimeNone, ProjectPage
 from datafest_archive.utils import dump_yaml
 
@@ -25,7 +28,7 @@ def build_project_structed_section(project: Project) -> ProjectPage:
     )
     authors = students + advisors
     edition = f"{project.semester} {project.year}"
-    topics = [topic.name for topic in project.topic] if project.topic else []
+    topics = [topic.name for topic in project.topics] if project.topics else []
     tags = [edition] + topics
 
     if project.awards:
@@ -53,10 +56,22 @@ def build_project_structed_section(project: Project) -> ProjectPage:
     return project_page
 
 
-def build_project_unstructed_section(project: Project) -> str:
-    return f"""
-{project.project_overview}
+def awards_to_markdown(awards: list[Award]) -> str:
+    awards_text = ""
+    if awards:
+        awards_text = "\n".join([f"- {award.name}" for award in awards])
+        return f"""
+        ## Awards
+        {awards_text}
     """
+    return awards_text
+
+
+def build_project_unstructed_section(project: Project) -> str:
+    template = jinja_environment.get_template("project_page.md.jinja")
+    return template.render(
+        project=project,
+    )
 
 
 def generate_project_page(project: Project) -> str:

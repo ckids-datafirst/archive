@@ -88,8 +88,6 @@ def create_directory(path: pathlib.Path) -> pathlib.Path:
 
 
 def write_file(content: str, path: pathlib.Path):
-    if path.exists() and path.is_file():
-        raise ValueError(f"Path {path} already exists.")
     if path.is_dir():
         raise ValueError(f"Path {path} is a directory.")
     if not path.parent.exists():
