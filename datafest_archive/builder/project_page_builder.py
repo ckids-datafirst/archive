@@ -2,6 +2,7 @@ from typing import List
 
 from datetime import datetime
 
+from datafest_archive.builder.templating import jinja_environment
 from datafest_archive.constants import DATE_YEAR_FORMAT, FEATURED_TAG
 from datafest_archive.models.database import Award, Project
 from datafest_archive.models.website.pages import DateTimeNone, ProjectPage
@@ -67,11 +68,10 @@ def awards_to_markdown(awards: list[Award]) -> str:
 
 
 def build_project_unstructed_section(project: Project) -> str:
-    description = f"""
-## Description
-{project.project_overview}
-"""
-    return f"""{description}{awards_to_markdown(project.awards)}"""
+    template = jinja_environment.get_template("project_page.md.jinja")
+    return template.render(
+        project=project,
+    )
 
 
 def generate_project_page(project: Project) -> str:

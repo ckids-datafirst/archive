@@ -1,5 +1,4 @@
-from typing import List
-
+from datafest_archive.builder.templating import jinja_environment
 from datafest_archive.constants import ROLE_STUDENT
 from datafest_archive.models.database import Student
 from datafest_archive.models.website.pages import Course, Education, PeoplePage, Social
@@ -63,25 +62,7 @@ def build_student_structured_section(student: Student) -> PeoplePage:
 
 
 def build_student_unstructured_section(student: Student) -> str:
-    if student.semesters_participated:
-        # split each semester into two parts (semester and year) and sort by year
-        student.semesters_participated = sorted(
-            [
-                f"{semester.split()[1]} {semester.split()[0]}"
-                for semester in student.semesters_participated
-            ]
-        )
-
-        semesters_participated = "\n".join(
-            [f"- {semester}" for semester in student.semesters_participated]
-        )
-
-    return f"""
-## Previous involvement
-
-{student.name} has been involved in the previous DataFest events:
-{semesters_participated}
-
-    """
-    return f"""
-    """
+    template = jinja_environment.get_template("student_page.md.jinja")
+    return template.render(
+        student=student,
+    )

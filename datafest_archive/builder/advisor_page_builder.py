@@ -1,3 +1,4 @@
+from datafest_archive.builder.templating import jinja_environment
 from datafest_archive.constants import ROLE_ADVISOR
 from datafest_archive.models.database import Advisor
 from datafest_archive.models.website.pages import Organization, PeoplePage, Social
@@ -39,26 +40,10 @@ def build_advisor_structured_section(advisor: Advisor) -> PeoplePage:
 
 def build_advisor_unstructured_section(advisor: Advisor) -> str:
     # convert a list of semesters_participated in a markdown items
-    if advisor.semesters_participated:
-        # split each semester into two parts (semester and year) and sort by year
-        advisor.semesters_participated = sorted(
-            [
-                f"{semester.split()[1]} {semester.split()[0]}"
-                for semester in advisor.semesters_participated
-            ]
-        )
-
-        semesters_participated = "\n".join(
-            [f"- {semester}" for semester in advisor.semesters_participated]
-        )
-
-    return f"""
-## Previous involvement
-
-{advisor.name} has been involved in the previous DataFest events:
-{semesters_participated}
-
-    """
+    template = jinja_environment.get_template("advisor_page.md.jinja")
+    return template.render(
+        advisor=advisor,
+    )
 
 
 def generate_advisor_page(advisor: Advisor) -> str:
