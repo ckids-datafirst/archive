@@ -41,6 +41,7 @@ class Topic:
 class Student:
     name: str
     email: str
+    semesters_participated: Optional[list[str]] = None
     id: Optional[int] = None
     degree_program: Optional[str] = None
     school: Optional[str] = None
@@ -56,6 +57,7 @@ class Advisor:
     name: str
     email: Optional[str] = None
     organization: Optional[str] = None
+    semesters_participated: Optional[list[str]] = None
     title: Optional[str] = None
     primary_school: Optional[str] = None
     id: Optional[int] = None
@@ -80,7 +82,7 @@ class Project(JSONWizard):
     skill_required: Optional[list[SkillOrSoftware]] = None
     awards: Optional[list[Award]] = None
     topics: Optional[list[Topic]] = None
-    students: Optional[list[Student]] = None
+    students: Optional[list[Advisor]] = None
     final_presentation: Optional[str] = None
     advisors: Optional[list[Advisor]] = None
 
@@ -108,4 +110,4 @@ class Edition:
     year: int
 
 
-Resource = Union[Project, Student, Advisor]
+Resource = Union[Project, Advisor, Advisor]

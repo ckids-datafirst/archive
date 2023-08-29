@@ -1,7 +1,9 @@
+from typing import List
+
 from datetime import datetime
 
 from datafest_archive.constants import DATE_YEAR_FORMAT, FEATURED_TAG
-from datafest_archive.models.database import Project
+from datafest_archive.models.database import Award, Project
 from datafest_archive.models.website.pages import DateTimeNone, ProjectPage
 from datafest_archive.utils import dump_yaml
 
@@ -53,10 +55,23 @@ def build_project_structed_section(project: Project) -> ProjectPage:
     return project_page
 
 
-def build_project_unstructed_section(project: Project) -> str:
-    return f"""
-{project.project_overview}
+def awards_to_markdown(awards: list[Award]) -> str:
+    awards_text = ""
+    if awards:
+        awards_text = "\n".join([f"- {award.name}" for award in awards])
+        return f"""
+        ## Awards
+        {awards_text}
     """
+    return awards_text
+
+
+def build_project_unstructed_section(project: Project) -> str:
+    description = f"""
+## Description
+{project.project_overview}
+"""
+    return f"""{description}{awards_to_markdown(project.awards)}"""
 
 
 def generate_project_page(project: Project) -> str:

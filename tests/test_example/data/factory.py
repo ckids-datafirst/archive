@@ -9,7 +9,6 @@ from datafest_archive.models.database import (
     Award,
     Project,
     SkillOrSoftware,
-    Student,
     Topic,
 )
 from tests.test_example.data.fake_data import (
@@ -59,8 +58,8 @@ class TopicFactory(DataclassFactory[Topic]):
         return cls.__random__.choice(topics)
 
 
-class StudentFactory(DataclassFactory[Student]):
-    __model__ = Student
+class StudentFactory(DataclassFactory[Advisor]):
+    __model__ = Advisor
     __random_seed__ = 2
     __faker__ = Faker(locale="en_US")
 
