@@ -25,7 +25,7 @@ def build_project_structed_section(project: Project) -> ProjectPage:
     )
     authors = students + advisors
     edition = f"{project.semester} {project.year}"
-    topics = [topic.name for topic in project.topic] if project.topic else []
+    topics = [topic.name for topic in project.topics] if project.topics else []
     tags = [edition] + topics
 
     if project.awards:

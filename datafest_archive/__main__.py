@@ -8,12 +8,14 @@ from rich.console import Console
 
 from datafest_archive import version
 from datafest_archive.reader.json_reader import handle_json
+from datafest_archive.reader.sqlite_reader import handle_sqlite
 
 
 class Reader(str, Enum):
     """The type of reader to use."""
 
     json = "json"
+    sqlite = "sqlite"
 
 
 app = typer.Typer(
@@ -62,6 +64,8 @@ def generate(
 ) -> None:
     if input_type == Reader.json:
         handle_json(path, website_output_directory)
+    elif input_type == Reader.sqlite:
+        handle_sqlite(path, website_output_directory)
 
 
 if __name__ == "__main__":

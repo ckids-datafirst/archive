@@ -52,4 +52,3 @@ def handle_json(directory: Path, output_directory: Path):
     validate_directory(directory)
     resources = get_resources(directory)
     generate_website(resources, output_directory)
-    pass
