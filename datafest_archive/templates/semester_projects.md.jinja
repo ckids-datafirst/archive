@@ -1,6 +1,5 @@
 
 {% if projects %}
-## Previous involvement
 {% for project in projects %}
 * [{{ project.name }}](../../projects/{{project.year}}-{{project.semester|lower}}/{{ project.id }})
 {% endfor %}
