@@ -27,6 +27,9 @@ class SkillOrSoftware:
     def from_db(row: tuple[str, str]):
         return SkillOrSoftware(name=row[0], type=row[1])
 
+    def from_spreadsheet(self, name: str, type: str):
+        return SkillOrSoftware(name=name, type=type)
+
 
 @dataclass
 class Topic:
@@ -71,14 +74,25 @@ class Advisor:
             primary_school=row[4],
         )
 
+    def from_spreadsheet(
+        name: str,
+        email: str,
+        title: str,
+    ):
+        return Advisor(
+            name=name,
+            email=email,
+            title=title,
+        )
+
 
 @dataclass
 class Project(JSONWizard):
-    id: int
     name: str
     semester: str
     year: int
     project_overview: str
+    id: Optional[int] = None
     skill_required: Optional[list[SkillOrSoftware]] = None
     awards: Optional[list[Award]] = None
     topics: Optional[list[Topic]] = None
@@ -94,6 +108,23 @@ class Project(JSONWizard):
             year=row[3],
             project_overview=row[4],
             final_presentation=row[5],
+        )
+
+    def from_spreadsheet(
+        name: str,
+        project_overview: str,
+        semester: str,
+        year: int,
+        skill_required: list[SkillOrSoftware],
+        advisors: list[Advisor],
+    ):
+        return Project(
+            name=name,
+            project_overview=project_overview,
+            semester=semester,
+            year=year,
+            skill_required=skill_required,
+            advisors=advisors,
         )
 
 
