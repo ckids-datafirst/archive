@@ -1,22 +1,25 @@
+from typing import List
+
 from pathlib import Path
 
 import yaml
 
+from datafest_archive.builder.templating import jinja_environment
 from datafest_archive.constants import (
     ALL_TAG,
     ALL_TAG_NAME,
-    CONTENT_EDITION_DIRECTORY,
-    EDITION_PEOPLE_PAGE,
-    EDITION_PROJECTS_PAGE,
-    EDITION_PROJECTS_WINNER_PAGE,
-    EDITION_STUDENTS_PAGE,
+    CONTENT_SEMESTER_DIRECTORY,
     FEATURED_TAG,
     FEATURED_TAG_NAME,
     INDEX_REGULAR_PAGE,
     ROLE_ADVISOR,
     ROLE_STUDENT,
+    SEMESTER_PEOPLE_PAGE,
+    SEMESTER_PROJECTS_PAGE,
+    SEMESTER_PROJECTS_WINNER_PAGE,
+    SEMESTER_STUDENTS_PAGE,
 )
-from datafest_archive.models.database import Edition, Semesters
+from datafest_archive.models.database import Edition, Project, Semesters
 from datafest_archive.models.website.pages import (
     DesignProject,
     FilterButton,
@@ -42,21 +45,32 @@ def generate_datetime_from_event(edition: Edition) -> str:
 
 
 def generate_edition_url(year: int, semester: str) -> str:
-    name = f"{CONTENT_EDITION_DIRECTORY}/{year}-{semester}"
+    name = f"{CONTENT_SEMESTER_DIRECTORY}/{year}-{semester}"
     return name.lower()
 
 
-def generate_edition_directory(edition: Edition, content_directory: Path):
+def generate_edition_directory(
+    edition: Edition, projects: list[Project], content_directory: Path
+):
+    # filter the projects by the edition
+    semester_projects = [
+        project
+        for project in projects
+        if project.semester == edition.semester and project.year == edition.year
+    ]
+    role_advisor = f"{ROLE_ADVISOR} ({edition.semester} {edition.year})"
+    role_student = f"{ROLE_STUDENT} ({edition.semester} {edition.year})"
+
     edition_directory = generate_edition_url(edition.year, edition.semester)
     project_edition_directory = create_directory(content_directory / edition_directory)
-    with open(project_edition_directory / EDITION_PROJECTS_PAGE, "w") as f:
-        f.write(generate_edition_potfolio_page(edition))
-    with open(project_edition_directory / EDITION_PEOPLE_PAGE, "w") as f:
-        f.write(generate_edition_people_page(edition, ROLE_ADVISOR))
+    with open(project_edition_directory / SEMESTER_PROJECTS_PAGE, "w") as f:
+        f.write(generate_edition_projects_page(edition, semester_projects))
+    with open(project_edition_directory / SEMESTER_PEOPLE_PAGE, "w") as f:
+        f.write(generate_edition_people_page(edition, role_advisor, "Advisors"))
     with open(project_edition_directory / INDEX_REGULAR_PAGE, "w") as f:
         f.write(generate_index_page())
-    with open(project_edition_directory / EDITION_STUDENTS_PAGE, "w") as f:
-        f.write(generate_edition_people_page(edition, ROLE_STUDENT))
+    with open(project_edition_directory / SEMESTER_STUDENTS_PAGE, "w") as f:
+        f.write(generate_edition_people_page(edition, role_student, "Students"))
 
 
 def generate_index_page() -> str:
@@ -68,12 +82,12 @@ def generate_index_page() -> str:
     return f"---\n{structured_content}\n---\n{unstructured_content}"
 
 
-def generate_edition_people_page(edition: Edition, role: str) -> str:
+def generate_edition_people_page(edition: Edition, role: str, title: str) -> str:
     content = PeopleContent(
         user_groups=[role],
     )
     widget_page = PeopleWidget(
-        title="Advisors",
+        title=title,
         subtitle=f"{edition.semester} {edition.year}",
         date=generate_datetime_from_event(edition),
         headless=True,
@@ -85,43 +99,27 @@ def generate_edition_people_page(edition: Edition, role: str) -> str:
     return f"---\n{structured_content}\n---\n{unstructured_content}"
 
 
-def generate_edition_potfolio_page(
-    edition: Edition, filter_featured: bool = False
+def generate_edition_projects_page(
+    edition: Edition, projects: list[Project], filter_featured: bool = False
 ) -> str:
+    title = f"{edition.semester} {edition.year} Projects"
+    subtitle = f"{len(projects)} projects"
     date_created = generate_datetime_from_event(edition)
     tags = [f"{edition.semester} {edition.year}"]
     title = f"{edition.semester} {edition.year} Projects"
-    filters = Filters(
-        folders=["projects"],
-        tags=tags,
-        exclude_tags=[],
-        kinds=["page"],
-    )
-    filter_featured_button = FilterButton(
-        name=FEATURED_TAG_NAME, tag=FEATURED_TAG, weight=1
-    )
-    filter_all_button = FilterButton(name=ALL_TAG_NAME, tag=ALL_TAG, weight=2)
-
-    content = PortfolioWidget(
-        title=f"{edition.semester} {edition.year} Projects",
-        filters=filters,
-        filter_button=[filter_all_button, filter_featured_button],
-        sort_by="Title",
-        sort_ascending=False,
-        default_button_index=0,
-    )
-
     design = DesignProject()
     portfolio = WidgetPage(
         title=title,
-        subtitle=f"{edition.semester} {edition.year}",
+        subtitle=subtitle,
         date=date_created,
         type="landing",
-        widget="portfolio",
-        content=content,
+        widget="markdown",
         headless=True,
         design=design,
     )
     structured_content = yaml.dump(portfolio)
-    unstructured_content = ""
+    template = jinja_environment.get_template("semester_projects.md.jinja")
+    unstructured_content = template.render(
+        projects=projects,
+    )
     return f"---\n{structured_content}\n---\n{unstructured_content}"

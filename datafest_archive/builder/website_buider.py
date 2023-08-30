@@ -3,13 +3,13 @@ from typing import List
 import logging
 from pathlib import Path
 
-from datafest_archive.builder.edition_page_builder import generate_edition_directory
 from datafest_archive.builder.menu_builder import generate_menu
 from datafest_archive.builder.page_builder import (
     generate_resource_page,
     generate_simple_page,
     get_resource_path,
 )
+from datafest_archive.builder.semester_page_builder import generate_edition_directory
 from datafest_archive.constants import (
     CONFIG_DIRECTORY,
     CONTENT_DIRECTORY,
@@ -70,10 +70,15 @@ def generate_resources(resources: list[Resource], content_directory: Path) -> No
         resource_path = get_resource_path(resource, content_directory)
         validate_write(content, resource_path)
 
+    # get projects
+
     # menu_content = generate_menu(editions)
     # validate_write(menu_content, config_directory / MENUS_FILE_NAME)
+
+    # get projects from resources
+    projects = [resource for resource in resources if isinstance(resource, Project)]
     for edition in editions:
-        generate_edition_directory(edition, content_directory)
+        generate_edition_directory(edition, projects, content_directory)
 
 
 def validate_write(content: str, resource_path: Path):
