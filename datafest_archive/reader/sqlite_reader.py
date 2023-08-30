@@ -5,7 +5,18 @@ import sqlite3
 from pathlib import Path
 
 from datafest_archive.builder.website_buider import generate_website
-from datafest_archive.models.database import Advisor, Award, Project, Student, Topic
+from datafest_archive.models.database import (
+    Advisor,
+    Award,
+    Project,
+    SkillOrSoftware,
+    Student,
+    Topic,
+)
+from datafest_archive.utils import (
+    full_name_to_first_and_last_name,
+    people_name_to_directory_name,
+)
 
 PROJECT_KEY = "projects"
 ADVISOR_KEY = "advisors"
@@ -30,12 +41,26 @@ def get_projects(cursor: sqlite3.Cursor) -> list[Project]:
         advisors = get_advisors_by_project_id(cursor, project.id)
         topics = get_topics_by_project_id(cursor, project.id)
         awards = get_awards_by_project_id(cursor, project.id)
-        project.topic = topics
+        skills = get_skills_by_project_id(cursor, project.id)
+        project.topics = topics
+        project.skill_required = skills
         project.awards = awards
         project.advisors = advisors
         project.students = students
         projects.append(project)
     return projects
+
+
+def get_skills_by_project_id(cursor: sqlite3.Cursor, project_id: int) -> list[str]:
+    skills: list[SkillOrSoftware] = []
+    cursor.execute(
+        "SELECT name, type FROM skill_or_software WHERE project_id = ?",
+        (project_id,),
+    )
+    for row in cursor.fetchall():
+        skill = SkillOrSoftware.from_db(row)
+        skills.append(skill)
+    return skills
 
 
 def get_topics_by_project_id(cursor: sqlite3.Cursor, project_id: int) -> list[Topic]:
@@ -73,6 +98,8 @@ def get_students_by_project_id(
     for row in cursor.fetchall():
         student = Student.from_db(row)
         student.semesters_participated = get_semester_student(cursor, student)
+        first_name, last_name = full_name_to_first_and_last_name(student.name)
+        student.url_name = people_name_to_directory_name(first_name, last_name)
         students.append(student)
     return students
 
@@ -110,6 +137,8 @@ def get_advisors_by_project_id(
     for row in cursor.fetchall():
         advisor = Advisor.from_db(row)
         advisor.semesters_participated = get_semester_advisor(cursor, advisor)
+        first_name, last_name = full_name_to_first_and_last_name(advisor.name)
+        advisor.url_name = people_name_to_directory_name(first_name, last_name)
         advisors.append(advisor)
     return advisors
 
@@ -120,6 +149,8 @@ def get_advisors(cursor: sqlite3.Cursor) -> list[Advisor]:
     for row in cursor.fetchall():
         advisor = Advisor.from_db(row)
         advisor.semesters_participated = get_semester_advisor(cursor, advisor)
+        first_name, last_name = full_name_to_first_and_last_name(advisor.name)
+        advisor.url_name = people_name_to_directory_name(first_name, last_name)
         advisors.append(advisor)
 
     return advisors
@@ -131,6 +162,8 @@ def get_students(cursor: sqlite3.Cursor) -> list[Student]:
     for row in cursor.fetchall():
         student = Student.from_db(row)
         student.semesters_participated = get_semester_student(cursor, student)
+        first_name, last_name = full_name_to_first_and_last_name(student.name)
+        student.url_name = people_name_to_directory_name(first_name, last_name)
         students.append(student)
     return students
 

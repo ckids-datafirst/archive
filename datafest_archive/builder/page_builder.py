@@ -32,10 +32,8 @@ def get_resource_path(resource: Resource, parent_directory: Path) -> Path:
 
 
 def create_advisor(advisor: Advisor, parent_directory: Path):
-    first_name, last_name = full_name_to_first_and_last_name(advisor.name)
-    directory_name = people_name_to_directory_name(first_name, last_name)
     advisor_directory = create_directory(
-        parent_directory / CONTENT_PEOPLE_DIRECTORY / directory_name
+        parent_directory / CONTENT_PEOPLE_DIRECTORY / advisor.url_name
     )
     return advisor_directory / INDEX_LIST_PAGE
 

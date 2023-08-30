@@ -1,7 +1,7 @@
 import typer
 from rich.console import Console
 
-from datafest_archive import version, website_subcommand
+from datafest_archive import project_call_subcommand, version, website_subcommand
 
 app = typer.Typer(
     name="datafest-archive",
@@ -13,6 +13,12 @@ app.add_typer(
     website_subcommand.app,
     name="website",
     help="Create pages of projects and people (students and advisors) from the database (sqlite3) using wowchemy-hugo-academic.",
+)
+
+app.add_typer(
+    project_call_subcommand.app,
+    name="project-call",
+    help="Reads the spreadsheet and imports the data into the database (sqlite3).",
 )
 
 console = Console()
