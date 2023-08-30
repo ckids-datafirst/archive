@@ -71,16 +71,20 @@ class SQLITE_MANAGER:
         """
         skill_name = skill.name
         skill_type = skill.type
-
-        response = self.cursor.execute(
-            "INSERT INTO skill_or_software (project_id, name, type) VALUES (?, ?, ?)",
-            (project_id, skill_name, skill_type),
-        )
-        self.conn.commit()
-        if response and response.lastrowid:
-            return response.lastrowid
+        existing_skill = self.check_if_project_skill_exists(project_id, skill)
+        if existing_skill:
+            print("Skill already exists in the database")
+            return existing_skill[0]
         else:
-            raise Exception("Could not insert project_has_skill")
+            response = self.cursor.execute(
+                "INSERT INTO skill_or_software (project_id, name, type) VALUES (?, ?, ?)",
+                (project_id, skill_name, skill_type),
+            )
+            self.conn.commit()
+            if response and response.lastrowid:
+                return response.lastrowid
+            else:
+                raise Exception("Could not insert project_has_skill")
 
     def insert_project_has_advisor(self, project_id: int, advisor_id: int):
         """
@@ -98,6 +102,19 @@ class SQLITE_MANAGER:
             return response.lastrowid
         else:
             raise Exception("Could not insert project_has_advisor")
+
+    def check_if_project_skill_exists(self, project_id: int, skill: SkillOrSoftware):
+        """
+        Check if a project skill exists in the database
+        :param project_id: project id
+        :param skill: skill to check
+        :return:
+        """
+        self.cursor.execute(
+            "SELECT * FROM skill_or_software WHERE project_id = ? AND name = ? AND type = ?",
+            (project_id, skill.name, skill.type),
+        )
+        return self.cursor.fetchone()
 
     def check_if_project_exists(self, project: Project):
         """

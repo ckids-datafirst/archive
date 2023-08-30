@@ -6,27 +6,19 @@ import yaml
 
 from datafest_archive.builder.templating import jinja_environment
 from datafest_archive.constants import (
-    ALL_TAG,
-    ALL_TAG_NAME,
     CONTENT_SEMESTER_DIRECTORY,
-    FEATURED_TAG,
-    FEATURED_TAG_NAME,
     INDEX_REGULAR_PAGE,
     ROLE_ADVISOR,
     ROLE_STUDENT,
-    SEMESTER_PEOPLE_PAGE,
+    SEMESTER_ADVISORS_PAGE,
     SEMESTER_PROJECTS_PAGE,
-    SEMESTER_PROJECTS_WINNER_PAGE,
     SEMESTER_STUDENTS_PAGE,
 )
 from datafest_archive.models.database import Edition, Project, Semesters
 from datafest_archive.models.website.pages import (
     DesignProject,
-    FilterButton,
-    Filters,
     PeopleContent,
     PeopleWidget,
-    PortfolioWidget,
     WidgetPage,
 )
 from datafest_archive.utils import (
@@ -58,6 +50,15 @@ def generate_edition_directory(
         for project in projects
         if project.semester == edition.semester and project.year == edition.year
     ]
+
+    semester_advisors = [
+        advisor for project in semester_projects for advisor in project.advisors
+    ]
+
+    semester_students = [
+        student for project in semester_projects for student in project.students
+    ]
+
     role_advisor = f"{ROLE_ADVISOR} ({edition.semester} {edition.year})"
     role_student = f"{ROLE_STUDENT} ({edition.semester} {edition.year})"
 
@@ -65,12 +66,13 @@ def generate_edition_directory(
     project_edition_directory = create_directory(content_directory / edition_directory)
     with open(project_edition_directory / SEMESTER_PROJECTS_PAGE, "w") as f:
         f.write(generate_edition_projects_page(edition, semester_projects))
-    with open(project_edition_directory / SEMESTER_PEOPLE_PAGE, "w") as f:
+    with open(project_edition_directory / SEMESTER_ADVISORS_PAGE, "w") as f:
         f.write(generate_edition_people_page(edition, role_advisor, "Advisors"))
     with open(project_edition_directory / INDEX_REGULAR_PAGE, "w") as f:
         f.write(generate_index_page())
-    with open(project_edition_directory / SEMESTER_STUDENTS_PAGE, "w") as f:
-        f.write(generate_edition_people_page(edition, role_student, "Students"))
+    if semester_students:
+        with open(project_edition_directory / SEMESTER_STUDENTS_PAGE, "w") as f:
+            f.write(generate_edition_people_page(edition, role_student, "Students"))
 
 
 def generate_index_page() -> str:

@@ -29,14 +29,6 @@ def generate_params_file() -> None:
     logging.warning("generate_params_file is not implemented")
 
 
-PAGE_INFO_FOR_ADVISORS = Pages(name="InfoForAdvisors", url="info_advisors", weight=1)
-PAGE_INFO_FOR_STUDENTS = Pages(name="InfoForStudents", url="info_students", weight=2)
-PAGE_PROJECTS = Pages(name="Projects", url="projects", weight=3)
-PAGE_PEOPLE = Pages(name="People", url="people", weight=4)
-PAGE_SPONSORS = Pages(name="Sponsors", url="sponsors", weight=5)
-PAGE_CONTACT = Pages(name="Contact", url="contact", weight=6)
-
-
 def generate_website(resources: list[Resource], content_directory: Path) -> None:
     generate_content(resources, content_directory)
 
@@ -45,20 +37,6 @@ def generate_content(resources: list[Resource], content_directory: Path) -> None
     # generate_info_for_advisors(content_directory)
     # generate_info_for_students(content_directory)
     generate_resources(resources, content_directory)
-
-
-def generate_info_for_advisors(output_directory: Path):
-    page = SimplePage("Information for Advisors", "We need to add content here", None)
-    content = generate_simple_page(page, "We need to add content here")
-    page_path = output_directory / f"{PAGE_INFO_FOR_ADVISORS.url}" / INDEX_LIST_PAGE
-    write_file(content, page_path)
-
-
-def generate_info_for_students(output_directory: Path):
-    page = SimplePage("Information for Students", "We need to add content here", None)
-    content = generate_simple_page(page, "We need to add content here")
-    page_path = output_directory / f"{PAGE_INFO_FOR_STUDENTS.url}" / INDEX_LIST_PAGE
-    write_file(content, page_path)
 
 
 def generate_resources(resources: list[Resource], content_directory: Path) -> None:

@@ -45,6 +45,7 @@ class Student:
     name: str
     email: str
     semesters_participated: Optional[list[str]] = None
+    url_name: Optional[str] = None
     id: Optional[int] = None
     degree_program: Optional[str] = None
     school: Optional[str] = None
@@ -60,6 +61,7 @@ class Advisor:
     name: str
     email: Optional[str] = None
     organization: Optional[str] = None
+    url_name: Optional[str] = None
     semesters_participated: Optional[list[str]] = None
     title: Optional[str] = None
     primary_school: Optional[str] = None

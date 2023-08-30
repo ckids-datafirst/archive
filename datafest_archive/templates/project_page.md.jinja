@@ -11,17 +11,25 @@
 {% endfor %}
 {% endif %}
 
-## Students
 
 {% if project.students %}
-{%- for student in project.students -%}
+## Students
+{% for student in project.students %}
 * {{ student.name }}
 {% endfor %}
 {% endif %}
 
+{%- if project.advisors -%}
 ## Advisors
-{% if project.advisors %}
-{%- for advisor in project.advisors -%}
-* {{ advisor.name }}
+{% for advisor in project.advisors %}
+* [{{ advisor.name }}](../../../author/{{ advisor.url_name }})
 {% endfor %}
+{%- endif -%}
+
+{% if project.skill_required %}
+## Skills Required by the team
+
+{% for skill in project.skill_required %}
+* {{ skill.name }}
+{%- endfor -%}
 {%- endif -%}
