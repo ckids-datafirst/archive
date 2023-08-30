@@ -2,7 +2,7 @@ from typing import List
 
 import yaml
 
-from datafest_archive.builder.edition_page_builder import generate_edition_url
+from datafest_archive.builder.semester_page_builder import generate_edition_url
 from datafest_archive.constants import (
     PREVIOUS_SEMESTERS_NAME,
     contact,

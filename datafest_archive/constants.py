@@ -1,16 +1,16 @@
 from datafest_archive.models.website.configuration import MenuItem
 
 CONTENT_DIRECTORY = "content"
-CONTENT_EDITION_DIRECTORY = "editions"
+CONTENT_SEMESTER_DIRECTORY = "editions"
 CONTENT_PEOPLE_DIRECTORY = "authors"
 CONTENT_PROJECT_DIRECTORY = "projects"
 CONFIG_DIRECTORY = "config"
 INDEX_REGULAR_PAGE = "index.md"
 INDEX_LIST_PAGE = "_index.md"
-EDITION_PEOPLE_PAGE = "people.md"
-EDITION_STUDENTS_PAGE = "students.md"
-EDITION_PROJECTS_WINNER_PAGE = "projects-winner.md"
-EDITION_PROJECTS_PAGE = "projects.md"
+SEMESTER_PEOPLE_PAGE = "people.md"
+SEMESTER_STUDENTS_PAGE = "students.md"
+SEMESTER_PROJECTS_WINNER_PAGE = "projects-winner.md"
+SEMESTER_PROJECTS_PAGE = "projects.md"
 
 FEATURED_TAG_NAME = "Award-Winning Projects"
 ALL_TAG_NAME = "All Projects"

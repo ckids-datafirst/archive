@@ -158,8 +158,8 @@ class WidgetPage:
     headless: bool
     type: str
     widget: str
-    content: PortfolioWidget
-    design: DesignProject
+    content: Optional[PortfolioWidget] = None
+    design: Optional[DesignProject] = None
 
 
 @dataclass
