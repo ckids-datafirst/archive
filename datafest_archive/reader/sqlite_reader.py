@@ -1,6 +1,3 @@
-from typing import List
-
-import json
 import sqlite3
 from pathlib import Path
 
@@ -28,15 +25,30 @@ def handle_sqlite(file: Path, content_directory: Path):
     projects = get_projects(cursor)
     advisors = get_advisors(cursor)
     students = get_students(cursor)
-    resources = projects + advisors + students
-    generate_website(resources, content_directory)
+    generate_website(
+        projects=projects,
+        advisors=advisors,
+        students=students,
+        content_directory=content_directory,
+    )
 
 
 def get_projects(cursor: sqlite3.Cursor) -> list[Project]:
     projects: list[Project] = []
     cursor.execute("SELECT * FROM project")
     for row in cursor.fetchall():
-        project = Project.from_db(row)
+        project = Project(
+            id=row[0],
+            name=row[1],
+            semester=row[2],
+            year=row[3],
+            project_overview=row[4],
+            final_presentation=row[5],
+            student_learning=row[6],
+        )
+        projects.append(project)
+        if project.id is None:
+            raise ValueError("Project id is None")
         students = get_students_by_project_id(cursor, project.id)
         advisors = get_advisors_by_project_id(cursor, project.id)
         topics = get_topics_by_project_id(cursor, project.id)
@@ -51,14 +63,16 @@ def get_projects(cursor: sqlite3.Cursor) -> list[Project]:
     return projects
 
 
-def get_skills_by_project_id(cursor: sqlite3.Cursor, project_id: int) -> list[str]:
+def get_skills_by_project_id(
+    cursor: sqlite3.Cursor, project_id: int
+) -> list[SkillOrSoftware]:
     skills: list[SkillOrSoftware] = []
     cursor.execute(
         "SELECT name, type FROM skill_or_software WHERE project_id = ?",
         (project_id,),
     )
     for row in cursor.fetchall():
-        skill = SkillOrSoftware.from_db(row)
+        skill = SkillOrSoftware(name=row[0], type=row[1])
         skills.append(skill)
     return skills
 
@@ -70,7 +84,7 @@ def get_topics_by_project_id(cursor: sqlite3.Cursor, project_id: int) -> list[To
         (project_id,),
     )
     for row in cursor.fetchall():
-        topic = Topic.from_db(row)
+        topic = Topic(name=row[1])
         topics.append(topic)
     return topics
 
@@ -82,7 +96,7 @@ def get_awards_by_project_id(cursor: sqlite3.Cursor, project_id: int) -> list[Aw
         (project_id,),
     )
     for row in cursor.fetchall():
-        award = Award.from_db(row)
+        award = Award(name=row[1])
         awards.append(award)
     return awards
 
@@ -96,18 +110,23 @@ def get_students_by_project_id(
         (project_id,),
     )
     for row in cursor.fetchall():
-        student = Student.from_db(row)
-        student.semesters_participated = get_semester_student(cursor, student)
-        first_name, last_name = full_name_to_first_and_last_name(student.name)
-        student.url_name = people_name_to_directory_name(first_name, last_name)
+        semesters_participated = get_semesters_by_student_id(cursor, row[0])
+        student = Student(
+            id=row[0],
+            name=row[1],
+            email=row[2],
+            degree_program=row[3],
+            school=row[4],
+            semesters_participated=semesters_participated,
+        )
         students.append(student)
     return students
 
 
-def get_semester_student(cursor: sqlite3.Cursor, student: Student):
-    if student.id:
+def get_semesters_by_student_id(cursor: sqlite3.Cursor, student_id: int):
+    if student_id:
         semester_participated: list[str] = []
-        for project in get_projects_by_student_id(cursor, student.id):
+        for project in get_projects_by_student_id(cursor, student_id):
             semester = f"{project.semester} {project.year}"
             if semester not in semester_participated:
                 semester_participated.append(semester)
@@ -135,10 +154,14 @@ def get_advisors_by_project_id(
         (project_id,),
     )
     for row in cursor.fetchall():
-        advisor = Advisor.from_db(row)
+        advisor = Advisor(
+            id=row[0],
+            name=row[1],
+            email=row[2],
+            organization=row[3],
+            primary_school=row[4],
+        )
         advisor.semesters_participated = get_semester_advisor(cursor, advisor)
-        first_name, last_name = full_name_to_first_and_last_name(advisor.name)
-        advisor.url_name = people_name_to_directory_name(first_name, last_name)
         advisors.append(advisor)
     return advisors
 
@@ -147,10 +170,14 @@ def get_advisors(cursor: sqlite3.Cursor) -> list[Advisor]:
     advisors: list[Advisor] = []
     cursor.execute("SELECT * FROM advisor")
     for row in cursor.fetchall():
-        advisor = Advisor.from_db(row)
+        advisor = Advisor(
+            id=row[0],
+            name=row[1],
+            email=row[2],
+            organization=row[3],
+            primary_school=row[4],
+        )
         advisor.semesters_participated = get_semester_advisor(cursor, advisor)
-        first_name, last_name = full_name_to_first_and_last_name(advisor.name)
-        advisor.url_name = people_name_to_directory_name(first_name, last_name)
         advisors.append(advisor)
 
     return advisors
@@ -160,8 +187,15 @@ def get_students(cursor: sqlite3.Cursor) -> list[Student]:
     students: list[Student] = []
     cursor.execute("SELECT * FROM student")
     for row in cursor.fetchall():
-        student = Student.from_db(row)
-        student.semesters_participated = get_semester_student(cursor, student)
+        semesters_participated = get_semesters_by_student_id(cursor, row[0])
+        student = Student(
+            id=row[0],
+            name=row[1],
+            email=row[2],
+            degree_program=row[3],
+            school=row[4],
+            semesters_participated=semesters_participated,
+        )
         first_name, last_name = full_name_to_first_and_last_name(student.name)
         student.url_name = people_name_to_directory_name(first_name, last_name)
         students.append(student)
@@ -178,7 +212,15 @@ def get_projects_by_student_id(
     )
 
     for row in cursor.fetchall():
-        project = Project.from_db(row)
+        project = Project(
+            id=row[0],
+            name=row[1],
+            semester=row[2],
+            year=row[3],
+            project_overview=row[4],
+            final_presentation=row[5],
+            student_learning=row[6],
+        )
         projects.append(project)
     return projects
 
@@ -193,6 +235,14 @@ def get_projects_by_advisor_id(
     )
 
     for row in cursor.fetchall():
-        project = Project.from_db(row)
+        project = Project(
+            id=row[0],
+            name=row[1],
+            semester=row[2],
+            year=row[3],
+            project_overview=row[4],
+            final_presentation=row[5],
+            student_learning=row[6],
+        )
         projects.append(project)
     return projects

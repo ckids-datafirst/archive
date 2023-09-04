@@ -1,5 +1,3 @@
-from typing import List
-
 from faker import Faker
 from polyfactory import Use
 from polyfactory.factories import DataclassFactory
@@ -9,6 +7,7 @@ from datafest_archive.models.database import (
     Award,
     Project,
     SkillOrSoftware,
+    Student,
     Topic,
 )
 from tests.test_example.data.fake_data import (
@@ -58,8 +57,8 @@ class TopicFactory(DataclassFactory[Topic]):
         return cls.__random__.choice(topics)
 
 
-class StudentFactory(DataclassFactory[Advisor]):
-    __model__ = Advisor
+class StudentFactory(DataclassFactory[Student]):
+    __model__ = Student
     __random_seed__ = 2
     __faker__ = Faker(locale="en_US")
 

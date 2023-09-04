@@ -10,32 +10,26 @@ from datafest_archive.builder.page_builder import (
 from datafest_archive.builder.project_page_builder import generate_project_page
 from datafest_archive.builder.semester_page_builder import generate_edition_directory
 from datafest_archive.builder.student_page_builder import generate_student_page
-from datafest_archive.models.database import (
-    Advisor,
-    Edition,
-    Project,
-    Resource,
-    Student,
-)
+from datafest_archive.models.database import Advisor, Edition, Project, Student
 from datafest_archive.utils import write_file
 
 
-def generate_website(resources: list[Resource], content_directory: Path) -> None:
-    generate_content(resources, content_directory)
+def generate_website(
+    projects: list[Project],
+    advisors: list[Advisor],
+    students: list[Student],
+    content_directory: Path,
+) -> None:
+    generate_content(projects, advisors, students, content_directory)
 
 
-def generate_content(resources: list[Resource], content_directory: Path) -> None:
-    generate_resources(resources, content_directory)
-
-
-def generate_resources(resources: list[Resource], content_directory: Path) -> None:
-    # config_directory = content_directory / CONFIG_DIRECTORY
+def generate_content(
+    projects: list[Project],
+    advisors: list[Advisor],
+    students: list[Student],
+    content_directory: Path,
+) -> None:
     editions: list[Edition] = []
-    projects = [resource for resource in resources if isinstance(resource, Project)]
-    advisors = [resource for resource in resources if isinstance(resource, Advisor)]
-    students = [resource for resource in resources if isinstance(resource, Student)]
-
-    # find all projects with the same name and edit the name to include the year
     # this is to avoid name collisions
     rename_project_duplicates(projects)
     for project in projects:
