@@ -20,35 +20,101 @@ DataFestArchive is a Python package designed to generate the DataFestArchive web
 ## Installation
 
 ```bash
-git clone https://github.com/ckids-datafirst/archive.git
-poetry run datafest-archive --help
+pip install datafest-archive
 ```
 
 ## Usage
 
-```bash
-$ poetry run datafest-archive generate --help
+DataFestArchive is a Python package designed to generate the DataFestArchive website from past versions of DataFest
 
- Usage: datafest-archive generate [OPTIONS] INPUT_PATH WEBSITE_OUTPUT_DIRECTORY
+**Usage**:
 
-Arguments
-* path INPUT_PATH  The input path to use. Depends on the type. [default: None] [required]
-* website_output_directory PATH The directory to output the website to. [default: None] [required]
-
-Options
-* --input-type [json]  The type of website to generate. [default: None] [required]
-   --help                      Show this message and exit.
+```console
+$ datafest-archive [OPTIONS] COMMAND [ARGS]...
 ```
 
-### Example
+**Options**:
 
-Generate the website from the JSON files in the `datafest-archive/data` directory and output the website to the `datafest-archive/website` directory.
+- `--help`: Show this message and exit.
 
-```bash
-$ poetry run datafest-archive generate --input-type json --input-path datafest-archive/data --website-output-directory datafest-archive/website
+**Commands**:
+
+- `project-call`: Reads the spreadsheet and imports the data...
+- `website`: Create pages of projects and people...
+
+## `datafest-archive main`
+
+## `datafest-archive project-call`
+
+Reads the spreadsheet and imports the data into the database (sqlite3).
+
+**Usage**:
+
+```console
+$ datafest-archive project-call [OPTIONS] COMMAND [ARGS]...
 ```
 
-The directory structure of the data directory should look like [this example](tests/input_data/json/2022-fall.json)
+**Options**:
+
+- `--help`: Show this message and exit.
+
+**Commands**:
+
+- `import-data`
+
+### `datafest-archive project-call import-data`
+
+**Usage**:
+
+```console
+$ datafest-archive project-call import-data [OPTIONS] SPREADSHEET_PATH DATABASE_FILE
+```
+
+**Arguments**:
+
+- `SPREADSHEET_PATH`: [required]
+- `DATABASE_FILE`: [required]
+
+**Options**:
+
+- `--help`: Show this message and exit.
+
+## `datafest-archive website`
+
+Create pages of projects and people (students and advisors) from the database (sqlite3) using wowchemy-hugo-academic.
+
+**Usage**:
+
+```console
+$ datafest-archive website [OPTIONS] COMMAND [ARGS]...
+```
+
+**Options**:
+
+- `--help`: Show this message and exit.
+
+**Commands**:
+
+- `create`
+
+### `datafest-archive website create`
+
+**Usage**:
+
+```console
+$ datafest-archive website create [OPTIONS] PATH WEBSITE_OUTPUT_DIRECTORY
+```
+
+**Arguments**:
+
+- `PATH`: [required]
+- `WEBSITE_OUTPUT_DIRECTORY`: [required]
+
+**Options**:
+
+- `--help`: Show this message and exit.
+
+`datafest-archive` is a command line tool that can be used to generate the DataFestArchive website from past versions of DataFest.
 
 ## Development documentation
 
