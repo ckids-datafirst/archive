@@ -23,11 +23,12 @@ def build_advisor_structured_section(advisor: Advisor) -> PeoplePage:
     if advisor.semesters_participated:
         for year in advisor.semesters_participated:
             users_groups.append(f"{ROLE_ADVISOR} ({year})")
+    role = advisor.title or ROLE_ADVISOR
     advisor_page = PeoplePage(
         title=advisor.name,
         first_name=first_name,
         last_name=last_name,
-        role=ROLE_ADVISOR,
+        role=role,
         user_groups=users_groups,
         social=[email],
         email=advisor.email,

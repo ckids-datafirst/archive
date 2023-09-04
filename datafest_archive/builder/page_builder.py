@@ -24,21 +24,21 @@ from datafest_archive.utils import (
 
 def get_resource_path(resource: Resource, parent_directory: Path) -> Path:
     if isinstance(resource, Project):
-        return create_project(resource, parent_directory)
+        return create_project_directory(resource, parent_directory)
     elif isinstance(resource, Advisor):
-        return create_student(resource, parent_directory)
+        return create_student_directory(resource, parent_directory)
     else:
-        return create_advisor(resource, parent_directory)
+        return create_advisor_directory(resource, parent_directory)
 
 
-def create_advisor(advisor: Advisor, parent_directory: Path):
+def create_advisor_directory(advisor: Advisor, parent_directory: Path):
     advisor_directory = create_directory(
         parent_directory / CONTENT_PEOPLE_DIRECTORY / advisor.url_name
     )
     return advisor_directory / INDEX_LIST_PAGE
 
 
-def create_student(student: Advisor, parent_directory: Path):
+def create_student_directory(student: Student, parent_directory: Path):
     first_name, last_name = full_name_to_first_and_last_name(student.name)
     directory_name = people_name_to_directory_name(first_name, last_name)
     student_directory = create_directory(
@@ -47,7 +47,7 @@ def create_student(student: Advisor, parent_directory: Path):
     return student_directory / f"_index.md"
 
 
-def create_project(resource: Project, parent_directory: Path):
+def create_project_directory(resource: Project, parent_directory: Path):
     edition = generate_project_url(resource)
     directory_name = f"{resource.id}"
     project_directory = create_directory(

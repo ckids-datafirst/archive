@@ -11,6 +11,7 @@ FACULTY_TITLE_COLUMN = 3
 PROJECT_TITLE_COLUMN = 4
 PROJECT_DESCRIPTION_COLUMN = 5
 PROJECT_SKILLS_COLUMN = 6
+PROJECT_STUDENT_LEARNING_COLUMN = 7
 
 
 def read_csv_file(path: Path) -> list[Project]:
@@ -26,7 +27,10 @@ def read_csv_file(path: Path) -> list[Project]:
             if counter > 1:
                 advisor = get_advisor(row)
                 skills = get_skills(row)
-                project = getProject(semester, year, row, advisor, skills)
+                student_learning = row[PROJECT_STUDENT_LEARNING_COLUMN]
+                project = getProject(
+                    semester, year, row, advisor, skills, student_learning
+                )
                 projects.append(project)
     return projects
 
@@ -37,6 +41,7 @@ def getProject(
     row: list[str],
     advisor: Advisor,
     skills: list[SkillOrSoftware],
+    student_learning: str,
 ):
     return Project.from_spreadsheet(
         name=row[PROJECT_TITLE_COLUMN],
@@ -45,6 +50,7 @@ def getProject(
         year=year,
         skill_required=skills,
         advisors=[advisor],
+        student_learning=student_learning,
     )
 
 

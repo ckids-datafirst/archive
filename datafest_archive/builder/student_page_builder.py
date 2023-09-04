@@ -28,7 +28,9 @@ def build_student_structured_section(student: Student) -> PeoplePage:
             link="mosorio@isi.edu",
         )
 
-    if student.degree_program is None and student.school is None:
+    if (student.degree_program is None and student.school is None) or (
+        student.degree_program == "Unknown" and student.school == "Unknown"
+    ):
         education = None
     else:
         education: Education = Education(

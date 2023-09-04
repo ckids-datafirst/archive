@@ -101,8 +101,9 @@ class Project(JSONWizard):
     students: Optional[list[Advisor]] = None
     final_presentation: Optional[str] = None
     advisors: Optional[list[Advisor]] = None
+    student_learning: Optional[str] = None
 
-    def from_db(row: tuple[int, str, str, int, str, str]):
+    def from_db(row: tuple[int, str, str, int, str, str, str]):
         return Project(
             id=row[0],
             name=row[1],
@@ -110,6 +111,7 @@ class Project(JSONWizard):
             year=row[3],
             project_overview=row[4],
             final_presentation=row[5],
+            student_learning=row[6],
         )
 
     def from_spreadsheet(
@@ -119,6 +121,7 @@ class Project(JSONWizard):
         year: int,
         skill_required: list[SkillOrSoftware],
         advisors: list[Advisor],
+        student_learning: str,
     ):
         return Project(
             name=name,
@@ -127,6 +130,7 @@ class Project(JSONWizard):
             year=year,
             skill_required=skill_required,
             advisors=advisors,
+            student_learning=student_learning,
         )
 
 
