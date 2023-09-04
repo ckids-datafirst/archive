@@ -1,62 +1,79 @@
-from typing import List
-
 import logging
 from pathlib import Path
 
-from datafest_archive.builder.menu_builder import generate_menu
+from datafest_archive.builder.advisor_page_builder import generate_advisor_page
 from datafest_archive.builder.page_builder import (
-    generate_resource_page,
-    generate_simple_page,
-    get_resource_path,
+    create_advisor_directory,
+    create_project_directory,
+    create_student_directory,
 )
+from datafest_archive.builder.project_page_builder import generate_project_page
 from datafest_archive.builder.semester_page_builder import generate_edition_directory
-from datafest_archive.constants import (
-    CONFIG_DIRECTORY,
-    CONTENT_DIRECTORY,
-    INDEX_LIST_PAGE,
-    MENUS_FILE_NAME,
-)
-from datafest_archive.models.database import Edition, Project, Resource
-from datafest_archive.models.website.pages import Pages, SimplePage
+from datafest_archive.builder.student_page_builder import generate_student_page
+from datafest_archive.models.database import Advisor, Edition, Project, Student
 from datafest_archive.utils import write_file
 
 
-def generate_config_file() -> None:
-    logging.warning("generate_config_file is not implemented")
+def generate_website(
+    projects: list[Project],
+    advisors: list[Advisor],
+    students: list[Student],
+    content_directory: Path,
+) -> None:
+    generate_content(projects, advisors, students, content_directory)
 
 
-def generate_params_file() -> None:
-    logging.warning("generate_params_file is not implemented")
-
-
-def generate_website(resources: list[Resource], content_directory: Path) -> None:
-    generate_content(resources, content_directory)
-
-
-def generate_content(resources: list[Resource], content_directory: Path) -> None:
-    # generate_info_for_advisors(content_directory)
-    # generate_info_for_students(content_directory)
-    generate_resources(resources, content_directory)
-
-
-def generate_resources(resources: list[Resource], content_directory: Path) -> None:
-    # config_directory = content_directory / CONFIG_DIRECTORY
+def generate_content(
+    projects: list[Project],
+    advisors: list[Advisor],
+    students: list[Student],
+    content_directory: Path,
+) -> None:
     editions: list[Edition] = []
-    for resource in resources:
-        editions = add_editions(editions, resource)
-        content = generate_resource_page(resource)
-        resource_path = get_resource_path(resource, content_directory)
-        validate_write(content, resource_path)
+    # this is to avoid name collisions
+    rename_project_duplicates(projects)
+    for project in projects:
+        create_project(content_directory, project)
+        add_editions(editions, project)
 
-    # get projects
+    for advisor in advisors:
+        create_advisor(content_directory, advisor)
 
-    # menu_content = generate_menu(editions)
-    # validate_write(menu_content, config_directory / MENUS_FILE_NAME)
+    for student in students:
+        create_student(content_directory, student)
 
-    # get projects from resources
-    projects = [resource for resource in resources if isinstance(resource, Project)]
     for edition in editions:
         generate_edition_directory(edition, projects, content_directory)
+
+
+def rename_project_duplicates(projects: list[Project]):
+    for project in projects:
+        project_name = project.name
+        project_year = project.year
+        for other_project in projects:
+            if other_project.name == project_name and (
+                other_project.year != project_year
+                or other_project.semester != project.semester
+            ):
+                other_project.name = f"{other_project.name} ({other_project.semester} - {other_project.year})"
+
+
+def create_student(content_directory, student):
+    content = generate_student_page(student)
+    student_page_path = create_student_directory(student, content_directory)
+    validate_write(content, student_page_path)
+
+
+def create_advisor(content_directory, advisor):
+    content = generate_advisor_page(advisor)
+    advisor_page_path = create_advisor_directory(advisor, content_directory)
+    validate_write(content, advisor_page_path)
+
+
+def create_project(content_directory, project):
+    content = generate_project_page(project)
+    project_page_path = create_project_directory(project, content_directory)
+    validate_write(content, project_page_path)
 
 
 def validate_write(content: str, resource_path: Path):
@@ -67,8 +84,8 @@ def validate_write(content: str, resource_path: Path):
         logging.error(e)
 
 
-def add_editions(editions: list[Edition], resource: Resource) -> list[Edition]:
-    if isinstance(resource, Project):
-        edition = Edition(resource.semester, resource.year)
+def add_editions(editions: list[Edition], project: Project) -> list[Edition]:
+    edition = Edition(project.semester, project.year)
+    if edition not in editions:
         editions.append(edition)
     return editions

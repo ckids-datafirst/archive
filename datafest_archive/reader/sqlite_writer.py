@@ -24,13 +24,14 @@ class SQLITE_MANAGER:
             return existing_user[0]
         else:
             response = self.cursor.execute(
-                "INSERT INTO project (name, semester, year, project_overview, final_presentation) VALUES (?, ?, ?, ?, ?)",
+                "INSERT INTO project (name, semester, year, project_overview, final_presentation, student_learning) VALUES (?, ?, ?, ?, ?, ?)",
                 (
                     project.name,
                     project.semester,
                     project.year,
                     project.project_overview,
                     project.final_presentation,
+                    project.student_learning,
                 ),
             )
             self.conn.commit()

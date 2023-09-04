@@ -15,7 +15,7 @@
 {% if project.students %}
 ## Students
 {% for student in project.students %}
-* {{ student.name }}
+* [{{ student.name }}](../../../author/{{ student.url_name }})
 {% endfor %}
 {% endif %}
 
@@ -32,4 +32,16 @@
 {% for skill in project.skill_required %}
 * {{ skill.name }}
 {%- endfor -%}
+{%- endif -%}
+
+{% if project.student_learning %}
+## What students will learn
+
+{{ project.student_learning }}
+{%- endif -%}
+
+{% if project.final_presentation %}
+## Final presentation resources
+
+* [Final presentation]({{ project.final_presentation }})
 {%- endif -%}

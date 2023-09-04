@@ -11,6 +11,7 @@ FACULTY_TITLE_COLUMN = 3
 PROJECT_TITLE_COLUMN = 4
 PROJECT_DESCRIPTION_COLUMN = 5
 PROJECT_SKILLS_COLUMN = 6
+PROJECT_STUDENT_LEARNING_COLUMN = 7
 
 
 def read_csv_file(path: Path) -> list[Project]:
@@ -26,7 +27,10 @@ def read_csv_file(path: Path) -> list[Project]:
             if counter > 1:
                 advisor = get_advisor(row)
                 skills = get_skills(row)
-                project = getProject(semester, year, row, advisor, skills)
+                student_learning = row[PROJECT_STUDENT_LEARNING_COLUMN]
+                project = getProject(
+                    semester, year, row, advisor, skills, student_learning
+                )
                 projects.append(project)
     return projects
 
@@ -37,14 +41,16 @@ def getProject(
     row: list[str],
     advisor: Advisor,
     skills: list[SkillOrSoftware],
+    student_learning: str,
 ):
-    return Project.from_spreadsheet(
+    return Project(
         name=row[PROJECT_TITLE_COLUMN],
         project_overview=row[PROJECT_DESCRIPTION_COLUMN],
         semester=semester,
         year=year,
         skill_required=skills,
         advisors=[advisor],
+        student_learning=student_learning,
     )
 
 
@@ -55,19 +61,19 @@ def get_skills(row: list[str]) -> list[SkillOrSoftware]:
     return [SkillOrSoftware(name=skill, type="software") for skill in skills]
 
 
-def get_advisor(row: list[str]):
+def get_advisor(row: list[str]) -> Advisor:
     advisor_email: str = row[FACULTY_EMAIL_COLUMN]
     advisor_name: str = row[FACULTY_NAME_COLUMN]
     if advisor_name and "and" in advisor_name:
         advisors = advisor_name.split(" and ")
-        advisor: Advisor = Advisor.from_spreadsheet(
+        advisor = Advisor(
             name=advisors[0],
             email=advisor_email,
             title=row[FACULTY_TITLE_COLUMN],
         )
     else:
         advisor_name = row[FACULTY_NAME_COLUMN]
-        advisor: Advisor = Advisor.from_spreadsheet(
+        advisor = Advisor(
             name=advisor_name,
             email=advisor_email,
             title=row[FACULTY_TITLE_COLUMN],
