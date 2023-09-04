@@ -5,7 +5,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
 name = "datafest-archive"
-version = "0.1.0"
+version = "1.0.0"
 description = "DataFestArchive is a Python package designed to generate the DataFestArchive website from past versions of DataFest"
 readme = "README.md"
 authors = ["ckids-datafirst <mosorio@isi.edu>"]
