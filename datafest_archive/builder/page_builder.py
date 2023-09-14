@@ -27,8 +27,7 @@ def create_advisor_directory(advisor: Advisor, parent_directory: Path):
 
 
 def create_student_directory(student: Student, parent_directory: Path):
-    first_name, last_name = full_name_to_first_and_last_name(student.name)
-    directory_name = people_name_to_directory_name(first_name, last_name)
+    directory_name = people_name_to_directory_name(student.name)
     student_directory = create_directory(
         parent_directory / CONTENT_PEOPLE_DIRECTORY / directory_name
     )

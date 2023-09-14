@@ -10,10 +10,7 @@ from datafest_archive.models.database import (
     Student,
     Topic,
 )
-from datafest_archive.utils import (
-    full_name_to_first_and_last_name,
-    people_name_to_directory_name,
-)
+from datafest_archive.utils import people_name_to_directory_name
 
 PROJECT_KEY = "projects"
 ADVISOR_KEY = "advisors"
@@ -46,7 +43,6 @@ def get_projects(cursor: sqlite3.Cursor) -> list[Project]:
             final_presentation=row[5],
             student_learning=row[6],
         )
-        projects.append(project)
         if project.id is None:
             raise ValueError("Project id is None")
         students = get_students_by_project_id(cursor, project.id)
@@ -196,8 +192,8 @@ def get_students(cursor: sqlite3.Cursor) -> list[Student]:
             school=row[4],
             semesters_participated=semesters_participated,
         )
-        first_name, last_name = full_name_to_first_and_last_name(student.name)
-        student.url_name = people_name_to_directory_name(first_name, last_name)
+        # first_name, last_name = full_name_to_first_and_last_name(student.name)
+        student.url_name = people_name_to_directory_name(student.name)
         students.append(student)
     return students
 

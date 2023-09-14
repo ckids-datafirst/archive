@@ -38,8 +38,7 @@ class People:
     url_name: Union[str, None] = None
 
     def __post_init__(self):
-        first_name, last_name = full_name_to_first_and_last_name(self.name)
-        self.url_name = people_name_to_directory_name(first_name, last_name)
+        self.url_name = people_name_to_directory_name(self.name)
 
 
 @dataclass
