@@ -1,4 +1,4 @@
-from typing import Annotated
+from typing import Annotated, Optional
 
 from pathlib import Path
 
@@ -11,15 +11,10 @@ app = typer.Typer()
 
 @app.command()
 def create(
-    path: Annotated[
-        Path,
-        typer.Argument(
-            metavar="INPUT_PATH", help="Database file to use.", default=None
-        ),
-    ],
+    path: Annotated[Path, typer.Option(help="Database file to use.", default=None)],
     website_output_directory: Annotated[
         Path,
-        typer.Argument(
+        typer.Option(
             help="The content directory of the website to output to. (e.g. content/)",
             default=None,
         ),

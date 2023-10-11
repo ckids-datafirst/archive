@@ -13,11 +13,11 @@ app = typer.Typer()
 def import_data(
     spreadsheet_path: Annotated[
         Path,
-        typer.Argument(help="Spreadsheet file to use.", default=None),
+        typer.Argument(help="Spreadsheet file to use."),
     ],
     database_file: Annotated[
         Path,
-        typer.Argument(help="Database sqlite3 file", default=None),
+        typer.Argument(help="Database sqlite3 file"),
     ],
 ) -> None:
     import_spreadsheet(spreadsheet_path, database_file)

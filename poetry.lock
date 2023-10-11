@@ -349,6 +349,20 @@ timedelta = ["pytimeparse (>=1.1.7)"]
 yaml = ["PyYAML (>=5.3)"]
 
 [[package]]
+name = "datafirst"
+version = "0.1.0"
+description = "Awesome `datafirst` is a Python cli/package created with https://github.com/TezRomacH/python-package-template"
+optional = false
+python-versions = ">=3.9.17,<4.0.0"
+files = [
+    {file = "datafirst-0.1.0-py3-none-any.whl", hash = "sha256:053694886180d2fc80f1afa8391253d91bae2f7799c38cd92e81fc66fbdadc36"},
+    {file = "datafirst-0.1.0.tar.gz", hash = "sha256:b70627ec4d3d43bacade03499e0bef580923088fa5e5535becd324b123eac50a"},
+]
+
+[package.dependencies]
+dataclass-wizard = ">=0.22.2,<0.23.0"
+
+[[package]]
 name = "dill"
 version = "0.3.7"
 description = "serialize all of Python"
@@ -1649,5 +1663,5 @@ files = [
 
 [metadata]
 lock-version = "2.0"
-python-versions = "^3.9"
-content-hash = "0484151af8156e1d0f73cceaac024712145d14ad916057e67367b050ff4d1c63"
+python-versions = "^3.9.17"
+content-hash = "0a7f9ef3b408e9878807b3398dfc4905ec6fe22199f923c1b501a41700db9c67"
