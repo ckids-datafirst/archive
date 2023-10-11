@@ -32,13 +32,14 @@ classifiers = [  #! Update me
 "datafest-archive" = "datafest_archive.__main__:app"
 
 [tool.poetry.dependencies]
-python = "^3.9"
+python = "^3.9.17"
 
 typer = {extras = ["all"], version = "^0.9.0"}
 rich = "^13.5.2"
 pyyaml = "^6.0.1"
 dataclass-wizard = "^0.22.2"
 jinja2 = "^3.1.2"
+datafirst = "^0.1.0"
 
 [tool.poetry.dev-dependencies]
 bandit = "^1.7.1"

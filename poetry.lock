@@ -349,6 +349,20 @@ timedelta = ["pytimeparse (>=1.1.7)"]
 yaml = ["PyYAML (>=5.3)"]
 
 [[package]]
+name = "datafirst"
+version = "0.1.0"
+description = "Awesome `datafirst` is a Python cli/package created with https://github.com/TezRomacH/python-package-template"
+optional = false
+python-versions = ">=3.9.17,<4.0.0"
+files = [
+    {file = "datafirst-0.1.0-py3-none-any.whl", hash = "sha256:053694886180d2fc80f1afa8391253d91bae2f7799c38cd92e81fc66fbdadc36"},
+    {file = "datafirst-0.1.0.tar.gz", hash = "sha256:b70627ec4d3d43bacade03499e0bef580923088fa5e5535becd324b123eac50a"},
+]
+
+[package.dependencies]
+dataclass-wizard = ">=0.22.2,<0.23.0"
+
+[[package]]
 name = "dill"
 version = "0.3.7"
 description = "serialize all of Python"
@@ -451,17 +465,20 @@ smmap = ">=3.0.1,<6"
 
 [[package]]
 name = "gitpython"
-version = "3.1.32"
+version = "3.1.37"
 description = "GitPython is a Python library used to interact with Git repositories"
 optional = false
 python-versions = ">=3.7"
 files = [
-    {file = "GitPython-3.1.32-py3-none-any.whl", hash = "sha256:e3d59b1c2c6ebb9dfa7a184daf3b6dd4914237e7488a1730a6d8f6f5d0b4187f"},
-    {file = "GitPython-3.1.32.tar.gz", hash = "sha256:8d9b8cb1e80b9735e8717c9362079d3ce4c6e5ddeebedd0361b228c3a67a62f6"},
+    {file = "GitPython-3.1.37-py3-none-any.whl", hash = "sha256:5f4c4187de49616d710a77e98ddf17b4782060a1788df441846bddefbb89ab33"},
+    {file = "GitPython-3.1.37.tar.gz", hash = "sha256:f9b9ddc0761c125d5780eab2d64be4873fc6817c2899cbcb34b02344bdc7bc54"},
 ]
 
 [package.dependencies]
 gitdb = ">=4.0.1,<5"
+
+[package.extras]
+test = ["black", "coverage[toml]", "ddt (>=1.1.1,!=1.4.3)", "mypy", "pre-commit", "pytest", "pytest-cov", "pytest-sugar"]
 
 [[package]]
 name = "identify"
@@ -1649,5 +1666,5 @@ files = [
 
 [metadata]
 lock-version = "2.0"
-python-versions = "^3.9"
-content-hash = "0484151af8156e1d0f73cceaac024712145d14ad916057e67367b050ff4d1c63"
+python-versions = "^3.9.17"
+content-hash = "0a7f9ef3b408e9878807b3398dfc4905ec6fe22199f923c1b501a41700db9c67"
