@@ -1,8 +1,4 @@
-from faker import Faker
-from polyfactory import Use
-from polyfactory.factories import DataclassFactory
-
-from datafest_archive.models.database import (
+from datafirst.models.database import (
     Advisor,
     Award,
     Project,
@@ -10,6 +6,10 @@ from datafest_archive.models.database import (
     Student,
     Topic,
 )
+from faker import Faker
+from polyfactory import Use
+from polyfactory.factories import DataclassFactory
+
 from tests.test_example.data.fake_data import (
     awards,
     degree_programs,

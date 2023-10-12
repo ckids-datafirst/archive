@@ -1,8 +1,7 @@
 import csv
 from pathlib import Path
 
-from datafest_archive.models.database import Advisor, Project, SkillOrSoftware
-from datafest_archive.reader.sqlite_writer import SQLITE_MANAGER
+from datafirst.models.database import Advisor, Project, SkillOrSoftware
 
 TIMESTAMP_COLUMN = 0
 FACULTY_EMAIL_COLUMN = 1

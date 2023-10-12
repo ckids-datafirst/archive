@@ -1,8 +1,7 @@
-from typing import List
-
 from pathlib import Path
 
 import yaml
+from datafirst.models.database import Edition, Project, Semesters
 
 from datafest_archive.builder.templating import jinja_environment
 from datafest_archive.constants import (
@@ -14,7 +13,6 @@ from datafest_archive.constants import (
     SEMESTER_PROJECTS_PAGE,
     SEMESTER_STUDENTS_PAGE,
 )
-from datafest_archive.models.database import Edition, Project, Semesters
 from datafest_archive.models.website.pages import (
     DesignProject,
     PeopleContent,

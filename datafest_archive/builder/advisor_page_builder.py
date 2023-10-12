@@ -1,8 +1,10 @@
+from datafirst.models.database import Advisor
+from datafirst.utils import full_name_to_first_and_last_name
+
 from datafest_archive.builder.templating import jinja_environment
 from datafest_archive.constants import ROLE_ADVISOR
-from datafest_archive.models.database import Advisor
 from datafest_archive.models.website.pages import Organization, PeoplePage, Social
-from datafest_archive.utils import dump_yaml, full_name_to_first_and_last_name
+from datafest_archive.utils import dump_yaml
 
 
 def build_advisor_structured_section(advisor: Advisor) -> PeoplePage:
@@ -19,7 +21,7 @@ def build_advisor_structured_section(advisor: Advisor) -> PeoplePage:
 
     first_name, last_name = full_name_to_first_and_last_name(advisor.name)
 
-    users_groups = []
+    users_groups: list["str"] = []
     if advisor.semesters_participated:
         for year in advisor.semesters_participated:
             users_groups.append(f"{ROLE_ADVISOR} ({year})")

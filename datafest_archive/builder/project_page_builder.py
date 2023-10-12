@@ -1,10 +1,9 @@
-from typing import List
-
 from datetime import datetime
+
+from datafirst.models.database import Award, Project
 
 from datafest_archive.builder.templating import jinja_environment
 from datafest_archive.constants import DATE_YEAR_FORMAT, FEATURED_TAG
-from datafest_archive.models.database import Award, Project
 from datafest_archive.models.website.pages import DateTimeNone, ProjectPage
 from datafest_archive.utils import dump_yaml
 
