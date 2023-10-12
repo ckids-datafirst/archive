@@ -11,17 +11,15 @@ app = typer.Typer()
 
 @app.command()
 def create(
-    path: Annotated[Path, typer.Option(help="Database file to use.", default=None)],
+    path: Annotated[Path, typer.Argument(help="Database file to use")],
     website_output_directory: Annotated[
         Path,
-        typer.Option(
-            help="The content directory of the website to output to. (e.g. content/)",
-            default=None,
+        typer.Argument(
+            help="The content directory of the website to output to. (e.g. content/)"
         ),
     ],
-) -> None:
+):
+    """
+    Create pages of projects and people (students and advisors) from the database (sqlite3) using wowchemy-hugo-academic.
+    """
     handle_sqlite(path, website_output_directory)
-
-
-if __name__ == "__main__":
-    app()
