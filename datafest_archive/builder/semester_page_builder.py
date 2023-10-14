@@ -15,6 +15,7 @@ from datafest_archive.constants import (
 )
 from datafest_archive.models.website.pages import (
     DesignProject,
+    DesignWidget,
     PeopleContent,
     PeopleWidget,
     WidgetPage,
@@ -93,6 +94,12 @@ def generate_edition_people_page(edition: Edition, role: str, title: str) -> str
         headless=True,
         widget="people",
         content=content,
+        design=DesignWidget(
+            show_interests=False,
+            show_role=False,
+            show_social=False,
+            show_organizations=True,
+        ),
     )
     structured_content = yaml.dump(widget_page)
     unstructured_content = ""

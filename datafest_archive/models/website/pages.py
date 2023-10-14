@@ -128,6 +128,14 @@ class PeopleContent:
 
 
 @dataclass
+class DesignWidget:
+    show_interests: Optional[bool]
+    show_role: Optional[bool]
+    show_social: Optional[bool]
+    show_organizations: Optional[bool]
+
+
+@dataclass
 class PeopleWidget:
     title: str
     subtitle: str
@@ -135,19 +143,13 @@ class PeopleWidget:
     headless: bool
     widget: str
     content: PeopleContent
+    design: DesignWidget  # type: ignore
 
 
 @dataclass
 class DesignProject:
     columns: str = "2"
     view: str = "card"
-
-
-@dataclass
-class DesignWidget:
-    show_interests: Optional[bool]
-    show_role: Optional[bool]
-    show_social: Optional[bool]
 
 
 @dataclass

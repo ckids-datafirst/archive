@@ -35,6 +35,9 @@ def build_project_structed_section(project: Project) -> ProjectPage:
         for award in project.awards:
             tags.append(award.name)
 
+    if topics:
+        tags.extend(topics)
+
     project_date = generate_datetime_from_project(project)
     project_page = ProjectPage(
         title=project.name,

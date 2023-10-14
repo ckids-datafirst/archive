@@ -39,7 +39,7 @@ rich = "^13.5.2"
 pyyaml = "^6.0.1"
 dataclass-wizard = "^0.22.2"
 jinja2 = "^3.1.2"
-datafirst = "0.1.2"
+datafirst = {git = "https://github.com/ckids-datafirst/datafirst.git", rev = "b1d8ef1bac408d946845e79ef3c38b63393cb725"}
 types-pyyaml = "^6.0.12.12"
 
 [tool.poetry.dev-dependencies]

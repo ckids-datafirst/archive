@@ -350,17 +350,21 @@ yaml = ["PyYAML (>=5.3)"]
 
 [[package]]
 name = "datafirst"
-version = "0.1.2"
+version = "0.1.3"
 description = "A Python package for working with DataFirst database."
 optional = false
-python-versions = ">=3.9.17,<4.0.0"
-files = [
-    {file = "datafirst-0.1.2-py3-none-any.whl", hash = "sha256:c496da297cd3a28e02d6a095277cf43ee9eb2005d4309d7311ae3f94545c1ebc"},
-    {file = "datafirst-0.1.2.tar.gz", hash = "sha256:170a6536aceb6afad8b7f9c46c246b0f127c6c5bc27c68d9e948dd627fed3a69"},
-]
+python-versions = "^3.9.17"
+files = []
+develop = false
 
 [package.dependencies]
-dataclass-wizard = ">=0.22.2,<0.23.0"
+dataclass-wizard = "^0.22.2"
+
+[package.source]
+type = "git"
+url = "https://github.com/ckids-datafirst/datafirst.git"
+reference = "b1d8ef1bac408d946845e79ef3c38b63393cb725"
+resolved_reference = "b1d8ef1bac408d946845e79ef3c38b63393cb725"
 
 [[package]]
 name = "dill"
@@ -1678,4 +1682,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.9.17"
-content-hash = "a15b51f859096209e122181f0fc536fbc58488e29658550345f5b9b556422512"
+content-hash = "57d24a51a8b6359f41b44b24c40b2051e1e6a0f8ac098ec9441b74333783aa04"

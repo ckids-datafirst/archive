@@ -14,10 +14,13 @@ def build_advisor_structured_section(advisor: Advisor) -> PeoplePage:
         link=f"mailto:{advisor.email}",
     )
 
-    organization: Organization = Organization(
-        name=advisor.organization,
-        url=None,
-    )
+    if advisor.primary_school is not None:
+        organization: Organization = Organization(
+            name=advisor.primary_school.name,
+            url=advisor.primary_school.url,
+        )
+    else:
+        organization = []
 
     first_name, last_name = full_name_to_first_and_last_name(advisor.name)
 
