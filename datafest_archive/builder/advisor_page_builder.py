@@ -15,10 +15,16 @@ def build_advisor_structured_section(advisor: Advisor) -> PeoplePage:
     )
 
     if advisor.primary_school is not None:
-        organization: Organization = Organization(
-            name=advisor.primary_school.name,
-            url=advisor.primary_school.url,
-        )
+        if isinstance(advisor.primary_school, str):
+            organization: Organization = Organization(
+                name=advisor.primary_school,
+                url="",
+            )
+        else:
+            organization: Organization = Organization(
+                name=advisor.primary_school.name,
+                url=advisor.primary_school.url,
+            )
     else:
         organization = Organization(
             name="",
