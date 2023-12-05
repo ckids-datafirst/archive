@@ -1,7 +1,5 @@
-# type: ignore[attr-defined]
 """DataFestArchive is a Python package designed to generate the DataFestArchive website from past versions of DataFest"""
 
-import sys
 from importlib import metadata as importlib_metadata
 
 

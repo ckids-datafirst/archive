@@ -19,6 +19,7 @@ ALL_TAG = "*"
 MENUS_FILE_NAME = "menus.yaml"
 
 ROLE_ADVISOR = "Advisor"
+ROLE_CHAIR = "Co-Chair"
 ROLE_STUDENT = "Student"
 
 DATE_YEAR_FORMAT = "%Y"

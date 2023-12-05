@@ -15,15 +15,7 @@
 
 </div>
 
-DataFestArchive is a Python package designed to generate the DataFestArchive website from past versions of DataFest
-
-## Installation
-
-```bash
-pip install datafest-archive
-```
-
-## Usage
+# `datafest-archive`
 
 DataFestArchive is a Python package designed to generate the DataFestArchive website from past versions of DataFest
 
@@ -39,45 +31,7 @@ $ datafest-archive [OPTIONS] COMMAND [ARGS]...
 
 **Commands**:
 
-- `project-call`: Reads the spreadsheet and imports the data...
 - `website`: Create pages of projects and people...
-
-## `datafest-archive main`
-
-## `datafest-archive project-call`
-
-Reads the spreadsheet and imports the data into the database (sqlite3).
-
-**Usage**:
-
-```console
-$ datafest-archive project-call [OPTIONS] COMMAND [ARGS]...
-```
-
-**Options**:
-
-- `--help`: Show this message and exit.
-
-**Commands**:
-
-- `import-data`
-
-### `datafest-archive project-call import-data`
-
-**Usage**:
-
-```console
-$ datafest-archive project-call import-data [OPTIONS] SPREADSHEET_PATH DATABASE_FILE
-```
-
-**Arguments**:
-
-- `SPREADSHEET_PATH`: [required]
-- `DATABASE_FILE`: [required]
-
-**Options**:
-
-- `--help`: Show this message and exit.
 
 ## `datafest-archive website`
 
@@ -95,9 +49,11 @@ $ datafest-archive website [OPTIONS] COMMAND [ARGS]...
 
 **Commands**:
 
-- `create`
+- `create`: Create pages of projects and people...
 
 ### `datafest-archive website create`
+
+Create pages of projects and people (students and advisors) from the database (sqlite3) using wowchemy-hugo-academic.
 
 **Usage**:
 
@@ -107,14 +63,12 @@ $ datafest-archive website create [OPTIONS] PATH WEBSITE_OUTPUT_DIRECTORY
 
 **Arguments**:
 
-- `PATH`: [required]
-- `WEBSITE_OUTPUT_DIRECTORY`: [required]
+- `PATH`: Database file to use [required]
+- `WEBSITE_OUTPUT_DIRECTORY`: The content directory of the website to output to. (e.g. content/) [required]
 
 **Options**:
 
 - `--help`: Show this message and exit.
-
-`datafest-archive` is a command line tool that can be used to generate the DataFestArchive website from past versions of DataFest.
 
 ## Development documentation
 

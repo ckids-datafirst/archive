@@ -1,8 +1,10 @@
+from datafirst.models.database import Advisor
+from datafirst.utils import full_name_to_first_and_last_name
+
 from datafest_archive.builder.templating import jinja_environment
-from datafest_archive.constants import ROLE_ADVISOR
-from datafest_archive.models.database import Advisor
+from datafest_archive.constants import ROLE_ADVISOR, ROLE_CHAIR
 from datafest_archive.models.website.pages import Organization, PeoplePage, Social
-from datafest_archive.utils import dump_yaml, full_name_to_first_and_last_name
+from datafest_archive.utils import dump_yaml
 
 
 def build_advisor_structured_section(advisor: Advisor) -> PeoplePage:
@@ -12,17 +14,35 @@ def build_advisor_structured_section(advisor: Advisor) -> PeoplePage:
         link=f"mailto:{advisor.email}",
     )
 
-    organization: Organization = Organization(
-        name=advisor.organization,
-        url=None,
-    )
+    if advisor.primary_school is not None:
+        if isinstance(advisor.primary_school, str):
+            organization: Organization = Organization(
+                name=advisor.primary_school,
+                url="",
+            )
+        else:
+            organization: Organization = Organization(
+                name=advisor.primary_school.name,
+                url=advisor.primary_school.url,
+            )
+    else:
+        organization = Organization(
+            name="",
+            url="",
+        )
 
     first_name, last_name = full_name_to_first_and_last_name(advisor.name)
 
-    users_groups = []
+    users_groups: list["str"] = []
+
     if advisor.semesters_participated:
         for year in advisor.semesters_participated:
             users_groups.append(f"{ROLE_ADVISOR} ({year})")
+
+    if advisor.semesters_participated_as_chair:
+        for year in advisor.semesters_participated_as_chair:
+            users_groups.append(f"{ROLE_CHAIR} ({year})")
+
     role = advisor.title or ROLE_ADVISOR
     advisor_page = PeoplePage(
         title=advisor.name,

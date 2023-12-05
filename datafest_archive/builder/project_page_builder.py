@@ -1,10 +1,9 @@
-from typing import List
-
 from datetime import datetime
+
+from datafirst.models.database import Award, Project
 
 from datafest_archive.builder.templating import jinja_environment
 from datafest_archive.constants import DATE_YEAR_FORMAT, FEATURED_TAG
-from datafest_archive.models.database import Award, Project
 from datafest_archive.models.website.pages import DateTimeNone, ProjectPage
 from datafest_archive.utils import dump_yaml
 
@@ -35,6 +34,9 @@ def build_project_structed_section(project: Project) -> ProjectPage:
         tags.append(FEATURED_TAG)
         for award in project.awards:
             tags.append(award.name)
+
+    if topics:
+        tags.extend(topics)
 
     project_date = generate_datetime_from_project(project)
     project_page = ProjectPage(

@@ -1,6 +1,8 @@
 import logging
 from pathlib import Path
 
+from datafirst.models.database import Advisor, Edition, Project, Student
+
 from datafest_archive.builder.advisor_page_builder import generate_advisor_page
 from datafest_archive.builder.page_builder import (
     create_advisor_directory,
@@ -10,7 +12,6 @@ from datafest_archive.builder.page_builder import (
 from datafest_archive.builder.project_page_builder import generate_project_page
 from datafest_archive.builder.semester_page_builder import generate_edition_directory
 from datafest_archive.builder.student_page_builder import generate_student_page
-from datafest_archive.models.database import Advisor, Edition, Project, Student
 from datafest_archive.utils import write_file
 
 
@@ -58,19 +59,19 @@ def rename_project_duplicates(projects: list[Project]):
                 other_project.name = f"{other_project.name} ({other_project.semester} - {other_project.year})"
 
 
-def create_student(content_directory, student):
+def create_student(content_directory: Path, student: Student):
     content = generate_student_page(student)
     student_page_path = create_student_directory(student, content_directory)
     validate_write(content, student_page_path)
 
 
-def create_advisor(content_directory, advisor):
+def create_advisor(content_directory: Path, advisor: Advisor):
     content = generate_advisor_page(advisor)
     advisor_page_path = create_advisor_directory(advisor, content_directory)
     validate_write(content, advisor_page_path)
 
 
-def create_project(content_directory, project):
+def create_project(content_directory: Path, project: Project):
     content = generate_project_page(project)
     project_page_path = create_project_directory(project, content_directory)
     validate_write(content, project_page_path)

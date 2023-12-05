@@ -1,6 +1,8 @@
 from pathlib import Path
 
 import yaml
+from datafirst.models.database import Advisor, Project, Student
+from datafirst.utils import people_name_to_directory_name
 
 from datafest_archive.builder.project_page_builder import generate_project_url
 from datafest_archive.constants import (
@@ -8,17 +10,12 @@ from datafest_archive.constants import (
     CONTENT_PROJECT_DIRECTORY,
     INDEX_LIST_PAGE,
 )
-from datafest_archive.models.database import Advisor, Project, Student
 from datafest_archive.models.website.pages import SimplePage
-from datafest_archive.utils import (
-    create_directory,
-    full_name_to_first_and_last_name,
-    people_name_to_directory_name,
-)
+from datafest_archive.utils import create_directory
 
 
-def create_advisor_directory(advisor: Advisor, parent_directory: Path):
-    if advisor.url_name is None:
+def create_advisor_directory(advisor: Advisor, parent_directory: Path) -> Path:
+    if advisor.url_name == "":
         raise ValueError("Advisor url_name is None")
     advisor_directory = create_directory(
         parent_directory / CONTENT_PEOPLE_DIRECTORY / advisor.url_name

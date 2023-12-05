@@ -1,8 +1,7 @@
-from typing import List
-
 from pathlib import Path
 
 import yaml
+from datafirst.models.database import Edition, Project, Semesters
 
 from datafest_archive.builder.templating import jinja_environment
 from datafest_archive.constants import (
@@ -14,9 +13,9 @@ from datafest_archive.constants import (
     SEMESTER_PROJECTS_PAGE,
     SEMESTER_STUDENTS_PAGE,
 )
-from datafest_archive.models.database import Edition, Project, Semesters
 from datafest_archive.models.website.pages import (
     DesignProject,
+    DesignWidget,
     PeopleContent,
     PeopleWidget,
     WidgetPage,
@@ -95,6 +94,12 @@ def generate_edition_people_page(edition: Edition, role: str, title: str) -> str
         headless=True,
         widget="people",
         content=content,
+        design=DesignWidget(
+            show_interests=False,
+            show_role=False,
+            show_social=False,
+            show_organizations=True,
+        ),
     )
     structured_content = yaml.dump(widget_page)
     unstructured_content = ""

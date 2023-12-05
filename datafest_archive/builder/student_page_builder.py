@@ -1,8 +1,10 @@
+from datafirst.models.database import Student
+from datafirst.utils import full_name_to_first_and_last_name
+
 from datafest_archive.builder.templating import jinja_environment
 from datafest_archive.constants import ROLE_STUDENT
-from datafest_archive.models.database import Student
 from datafest_archive.models.website.pages import Course, Education, PeoplePage, Social
-from datafest_archive.utils import dump_yaml, full_name_to_first_and_last_name
+from datafest_archive.utils import dump_yaml
 
 
 def generate_student_page(student: Student) -> str:

@@ -1,6 +1,5 @@
-from typing import List
-
 import yaml
+from datafirst.models.database import Edition
 
 from datafest_archive.builder.semester_page_builder import generate_edition_url
 from datafest_archive.constants import (
@@ -11,7 +10,6 @@ from datafest_archive.constants import (
     people,
     projects,
 )
-from datafest_archive.models.database import Edition
 from datafest_archive.models.website.configuration import Menu, MenuItem
 from datafest_archive.models.website.pages import Pages
 from datafest_archive.utils import dump_yaml
